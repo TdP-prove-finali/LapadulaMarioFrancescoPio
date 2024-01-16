@@ -1,7 +1,7 @@
-package it.polito.tdp.PremierLeague;
+package it.polito.tdp.SimulazioneF1;
 
+import it.polito.tdp.SimulazioneF1.model.Model;
 import javafx.application.Application;
-import it.polito.tdp.PremierLeague.model.Model;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;

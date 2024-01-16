@@ -1,4 +1,4 @@
-package it.polito.tdp.PremierLeague.db;
+package it.polito.tdp.SimulazioneF1.db;
 
 import java.sql.Connection;
 import java.sql.SQLException;
@@ -8,7 +8,7 @@ import com.zaxxer.hikari.HikariDataSource;
 
 public class DBConnect {
 
-	private static final String jdbcURL = "jdbc:mysql://localhost/PremierLeague";
+	private static final String jdbcURL = "jdbc:mysql://localhost/simulazionef1";
 	private static HikariDataSource ds;
 	
 	public static Connection getConnection() {
@@ -17,7 +17,7 @@ public class DBConnect {
 			HikariConfig config = new HikariConfig();
 			config.setJdbcUrl(jdbcURL);
 			config.setUsername("root");
-			config.setPassword("rootroot");
+			config.setPassword("Elliot59");
 			
 			// configurazione MySQL
 			config.addDataSourceProperty("cachePrepStmts", "true");

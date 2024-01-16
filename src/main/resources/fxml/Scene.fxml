@@ -2,82 +2,276 @@
 
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.BorderPane?>
-<?import javafx.scene.layout.ColumnConstraints?>
-<?import javafx.scene.layout.GridPane?>
-<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
 
-<BorderPane prefHeight="620.0" prefWidth="428.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polito.tdp.PremierLeague.FXMLController">
-   <top>
-      <Label text="Esame 14/07/2020 PremierLeague" BorderPane.alignment="CENTER">
-         <BorderPane.margin>
-            <Insets bottom="10.0" />
-         </BorderPane.margin>
-      </Label>
-   </top>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="415.0" prefWidth="650.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
    <center>
-      <VBox prefHeight="605.0" prefWidth="428.0" BorderPane.alignment="CENTER">
+      <HBox prefHeight="100.0" prefWidth="200.0" BorderPane.alignment="CENTER">
          <children>
-            <GridPane prefHeight="150.0" prefWidth="300.0">
-              <columnConstraints>
-                <ColumnConstraints halignment="RIGHT" hgrow="SOMETIMES" maxWidth="132.0" minWidth="10.0" prefWidth="104.0" />
-                <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="277.0" minWidth="10.0" prefWidth="175.0" />
-                  <ColumnConstraints halignment="RIGHT" hgrow="SOMETIMES" maxWidth="166.0" minWidth="10.0" prefWidth="149.0" />
-              </columnConstraints>
-              <rowConstraints>
-                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-              </rowConstraints>
+            <VBox prefHeight="400.0" prefWidth="325.0">
                <children>
-                  <Button fx:id="btnCreaGrafo" mnemonicParsing="false" onAction="#doCreaGrafo" prefWidth="200.0" text="Crea Grafo" GridPane.columnIndex="2">
-                     <GridPane.margin>
-                        <Insets right="5.0" />
-                     </GridPane.margin>
-                  </Button>
-                  <Button fx:id="btnClassifica" mnemonicParsing="false" onAction="#doClassifica" prefWidth="200.0" text="Classifica Squadra" GridPane.columnIndex="2" GridPane.rowIndex="1">
-                     <GridPane.margin>
-                        <Insets right="5.0" />
-                     </GridPane.margin>
-                  </Button>
-                  <Button fx:id="btnSimula" mnemonicParsing="false" onAction="#doSimula" prefWidth="200.0" text="Collegamento" GridPane.columnIndex="2" GridPane.rowIndex="3">
-                     <GridPane.margin>
-                        <Insets right="5.0" />
-                     </GridPane.margin>
-                  </Button>
-                  <Label text="N" GridPane.rowIndex="3">
-                     <GridPane.margin>
-                        <Insets right="10.0" />
-                     </GridPane.margin>
-                  </Label>
-                  <Label text="Squadra (s)" GridPane.rowIndex="1">
-                     <padding>
-                        <Insets right="10.0" />
-                     </padding>
-                  </Label>
-                  <Label text="Soglia critica (X)" GridPane.rowIndex="4">
-                     <GridPane.margin>
-                        <Insets right="10.0" />
-                     </GridPane.margin>
-                  </Label>
-                  <ComboBox fx:id="cmbSquadra" prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                  <TextField fx:id="txtN" maxWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-                  <TextField fx:id="txtX" maxWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                  <HBox prefHeight="70.0" prefWidth="300.0">
+                     <children>
+                        <Text fill="#bc1515" strokeType="OUTSIDE" strokeWidth="0.0" text="Scegli il team con cui simulare la stagione." textAlignment="CENTER" wrappingWidth="314.64031982421875">
+                           <font>
+                              <Font name="System Bold" size="18.0" />
+                           </font>
+                           <HBox.margin>
+                              <Insets bottom="15.0" left="5.0" right="5.0" top="15.0" />
+                           </HBox.margin>
+                        </Text>
+                     </children>
+                  </HBox>
+                  <HBox prefHeight="79.0" prefWidth="300.0">
+                     <children>
+                        <ComboBox fx:id="ComboScuderia" prefHeight="30.0" prefWidth="200.0">
+                           <HBox.margin>
+                              <Insets left="60.0" right="50.0" top="10.0" />
+                           </HBox.margin>
+                        </ComboBox>
+                     </children>
+                  </HBox>
+                  <HBox prefHeight="70.0" prefWidth="326.0">
+                     <children>
+                        <Label prefHeight="30.0" prefWidth="236.0" text="Clicca per cambiare i piloti del tuo team">
+                           <HBox.margin>
+                              <Insets left="28.0" right="15.0" top="15.0" />
+                           </HBox.margin>
+                           <font>
+                              <Font name="System Bold Italic" size="12.0" />
+                           </font>
+                        </Label>
+                        <CheckBox fx:id="CheckPiloti" alignment="CENTER" mnemonicParsing="false" onAction="#DoPiloti" prefHeight="30.0" prefWidth="17.0" style="-fx-alignment: center;">
+                           <HBox.margin>
+                              <Insets top="15.0" />
+                           </HBox.margin>
+                        </CheckBox>
+                     </children>
+                  </HBox>
+                  <HBox prefHeight="70.0" prefWidth="326.0">
+                     <children>
+                        <ComboBox fx:id="CBPilota1" disable="true" prefHeight="30.0" prefWidth="200.0" promptText="Pilota 1">
+                           <HBox.margin>
+                              <Insets left="60.0" right="50.0" top="15.0" />
+                           </HBox.margin>
+                        </ComboBox>
+                     </children>
+                  </HBox>
+                  <HBox prefHeight="68.0" prefWidth="326.0">
+                     <children>
+                        <ComboBox fx:id="CBPilota2" disable="true" prefHeight="30.0" prefWidth="200.0" promptText="Pilota 2">
+                           <HBox.margin>
+                              <Insets left="60.0" right="50.0" top="15.0" />
+                           </HBox.margin>
+                        </ComboBox>
+                     </children>
+                  </HBox>
+                  <HBox prefHeight="58.0" prefWidth="326.0">
+                     <children>
+                        <Button fx:id="BtnConfermaScelta" mnemonicParsing="false" onAction="#DoConfermaScelta" prefHeight="26.0" prefWidth="105.0" text="Conferma scelta">
+                           <HBox.margin>
+                              <Insets left="110.0" top="10.0" />
+                           </HBox.margin>
+                        </Button>
+                     </children>
+                  </HBox>
                </children>
-            </GridPane>
-            <TextArea fx:id="txtResult" prefHeight="436.0" prefWidth="428.0">
-               <VBox.margin>
-                  <Insets top="10.0" />
-               </VBox.margin>
-            </TextArea>
+            </VBox>
+            <VBox prefHeight="400.0" prefWidth="325.0">
+               <children>
+                  <HBox prefHeight="100.0" prefWidth="200.0">
+                     <children>
+                        <Label prefHeight="30.0" prefWidth="274.0" text="Clicca per investire sullo sviluppo della scuderia">
+                           <HBox.margin>
+                              <Insets left="5.0" right="10.0" top="13.0" />
+                           </HBox.margin>
+                           <font>
+                              <Font name="System Bold Italic" size="12.0" />
+                           </font>
+                        </Label>
+                        <CheckBox fx:id="CheckInvestimento" alignment="CENTER" mnemonicParsing="false" onAction="#DoInvestimento" prefHeight="30.0" prefWidth="17.0">
+                           <HBox.margin>
+                              <Insets top="13.0" />
+                           </HBox.margin>
+                        </CheckBox>
+                     </children>
+                  </HBox>
+                  <HBox prefHeight="30.0" prefWidth="300.0">
+                     <children>
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Inserire gli importi da investire in ogni reparto." textAlignment="CENTER" wrappingWidth="314.413330078125">
+                           <HBox.margin>
+                              <Insets left="5.0" right="5.0" />
+                           </HBox.margin>
+                           <font>
+                              <Font size="13.0" />
+                           </font>
+                        </Text>
+                     </children>
+                  </HBox>
+                  <HBox prefHeight="30.0" prefWidth="300.0">
+                     <children>
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="La somma degli importi non può superare i 140 M $." textAlignment="CENTER" wrappingWidth="315.4046630859375">
+                           <HBox.margin>
+                              <Insets bottom="5.0" left="5.0" right="5.0" />
+                           </HBox.margin>
+                           <font>
+                              <Font size="13.0" />
+                           </font>
+                        </Text>
+                     </children>
+                  </HBox>
+                  <HBox prefHeight="100.0" prefWidth="200.0">
+                     <children>
+                        <Label prefHeight="30.0" prefWidth="28.0" text="Label">
+                           <HBox.margin>
+                              <Insets left="45.0" right="30.0" top="10.0" />
+                           </HBox.margin>
+                        </Label>
+                        <TextField fx:id="text1" prefHeight="30.0" prefWidth="150.0">
+                           <HBox.margin>
+                              <Insets top="10.0" />
+                           </HBox.margin>
+                        </TextField>
+                        <Label prefHeight="30.0" prefWidth="21.0" text="M $">
+                           <HBox.margin>
+                              <Insets left="5.0" top="10.0" />
+                           </HBox.margin>
+                        </Label>
+                     </children>
+                  </HBox>
+                  <HBox prefHeight="100.0" prefWidth="200.0">
+                     <children>
+                        <Label prefHeight="30.0" prefWidth="28.0" text="Label">
+                           <HBox.margin>
+                              <Insets left="45.0" right="30.0" top="10.0" />
+                           </HBox.margin>
+                        </Label>
+                        <TextField fx:id="text2" prefHeight="30.0" prefWidth="150.0">
+                           <HBox.margin>
+                              <Insets top="10.0" />
+                           </HBox.margin>
+                        </TextField>
+                        <Label prefHeight="30.0" prefWidth="21.0" text="M $">
+                           <HBox.margin>
+                              <Insets left="5.0" top="10.0" />
+                           </HBox.margin>
+                        </Label>
+                     </children>
+                  </HBox>
+                  <HBox prefHeight="100.0" prefWidth="200.0">
+                     <children>
+                        <Label prefHeight="30.0" prefWidth="28.0" text="Label">
+                           <HBox.margin>
+                              <Insets left="45.0" right="30.0" top="10.0" />
+                           </HBox.margin>
+                        </Label>
+                        <TextField fx:id="text3" prefHeight="30.0" prefWidth="150.0">
+                           <HBox.margin>
+                              <Insets top="10.0" />
+                           </HBox.margin>
+                        </TextField>
+                        <Label prefHeight="30.0" prefWidth="21.0" text="M $">
+                           <HBox.margin>
+                              <Insets left="5.0" top="10.0" />
+                           </HBox.margin>
+                        </Label>
+                     </children>
+                  </HBox>
+                  <HBox prefHeight="100.0" prefWidth="200.0">
+                     <children>
+                        <Label prefHeight="30.0" prefWidth="28.0" text="Label">
+                           <HBox.margin>
+                              <Insets left="45.0" right="30.0" top="10.0" />
+                           </HBox.margin>
+                        </Label>
+                        <TextField fx:id="text4" prefHeight="30.0" prefWidth="150.0">
+                           <HBox.margin>
+                              <Insets top="10.0" />
+                           </HBox.margin>
+                        </TextField>
+                        <Label prefHeight="30.0" prefWidth="21.0" text="M $">
+                           <HBox.margin>
+                              <Insets left="5.0" top="10.0" />
+                           </HBox.margin>
+                        </Label>
+                     </children>
+                  </HBox>
+                  <HBox prefHeight="100.0" prefWidth="200.0">
+                     <children>
+                        <Label prefHeight="30.0" prefWidth="28.0" text="Label">
+                           <HBox.margin>
+                              <Insets left="45.0" right="30.0" top="10.0" />
+                           </HBox.margin>
+                        </Label>
+                        <TextField fx:id="text5" prefHeight="30.0" prefWidth="150.0">
+                           <HBox.margin>
+                              <Insets top="10.0" />
+                           </HBox.margin>
+                        </TextField>
+                        <Label prefHeight="30.0" prefWidth="21.0" text="M $">
+                           <HBox.margin>
+                              <Insets left="5.0" top="10.0" />
+                           </HBox.margin>
+                        </Label>
+                     </children>
+                  </HBox>
+                  <HBox prefHeight="100.0" prefWidth="200.0">
+                     <children>
+                        <Label prefHeight="30.0" prefWidth="28.0" text="Label">
+                           <HBox.margin>
+                              <Insets left="45.0" right="30.0" top="10.0" />
+                           </HBox.margin>
+                        </Label>
+                        <TextField fx:id="text6" prefHeight="30.0" prefWidth="150.0">
+                           <HBox.margin>
+                              <Insets top="10.0" />
+                           </HBox.margin>
+                        </TextField>
+                        <Label prefHeight="30.0" prefWidth="21.0" text="M $">
+                           <HBox.margin>
+                              <Insets left="5.0" top="10.0" />
+                           </HBox.margin>
+                        </Label>
+                     </children>
+                  </HBox>
+               </children>
+            </VBox>
          </children>
-      </VBox>
+      </HBox>
    </center>
+   <bottom>
+      <HBox prefHeight="66.0" prefWidth="650.0" BorderPane.alignment="CENTER">
+         <children>
+            <Button fx:id="Azzera" mnemonicParsing="false" onAction="#DoAzzera" prefHeight="26.0" prefWidth="75.0" text="Azzera">
+               <HBox.margin>
+                  <Insets left="175.0" right="150.0" top="24.0" />
+               </HBox.margin>
+            </Button>
+            <Button fx:id="Simula" mnemonicParsing="false" onAction="#DoSimula" prefHeight="26.0" prefWidth="74.0" text="Simula">
+               <HBox.margin>
+                  <Insets top="24.0" />
+               </HBox.margin>
+            </Button>
+         </children>
+      </HBox>
+   </bottom>
+   <top>
+      <Text fill="#310070" strokeType="OUTSIDE" strokeWidth="0.0" text="Simulazione stagione F1 2024" textAlignment="CENTER" wrappingWidth="650.9366672039032" BorderPane.alignment="CENTER">
+         <font>
+            <Font size="29.0" />
+         </font>
+         <BorderPane.margin>
+            <Insets bottom="8.0" top="5.0" />
+         </BorderPane.margin>
+      </Text>
+   </top>
 </BorderPane>
