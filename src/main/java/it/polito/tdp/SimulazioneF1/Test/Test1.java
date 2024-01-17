@@ -34,29 +34,29 @@ public class Test1 {
 						
 					double d3 = (p1.getOvertaking()-p2.getDefending())/p1.getOvertaking();
 					
-					double media = 0.11;
-			        double varianza = 0.02;
+					double media = 0;
+			        double varianza = 0.04;
 			        double deviazioneStandard = Math.sqrt(varianza);
 
 			        NormalDistribution distribuzioneNormale = new NormalDistribution(media, deviazioneStandard);
-					double dd = distribuzioneNormale.sample();
+					double dd = distribuzioneNormale.sample()*10+2;
 					
-					double a = ((((d1+Math.abs(d1)*0.25)*0.8+d2+d3*1.25)*100000)/1000.0);
-					double b = ((((d1+Math.abs(d1)*0.25)*0.8+d2+d3*1.25+dd)*100000)/1000.0);
-					
-					if(a>0 && b<0) {
+					System.out.println(dd);
+					if((d1*0.44+d2*0.41+d3*0.15+dd)>0) {
 						System.out.println(BLUE);
-					}else if(a<0 & b>0) {
+					}else{
 						System.out.println(RED);
 					}
 					
-					System.out.println(p1.getCognome()+"   ->"+p1.getS().getTotOVR()+" -"+p1.getOvr()+ " "+p1.getOvertaking());
-					System.out.println(p2.getCognome()+"   ->"+p2.getS().getTotOVR()+" -"+p2.getOvr()+ " "+p2.getDefending());
+					System.out.println(p1.getCognome()+"   ->"+p1.getS().getTotOVR()+" "+p1.getOvr()+ " "+p1.getOvertaking());
+					System.out.println(p2.getCognome()+"   ->"+p2.getS().getTotOVR()+" "+p2.getOvr()+ " "+p2.getDefending());
 					
 					//System.out.println("d1: "+Math.round(d1*0.8*100000)/1000.0+" d2:"+Math.round(d2*100000)/1000.0+" d3:"+Math.round(d3*100000)/1000.0+"   ="+Math.round((d1*0.8+d2+d3*1.25)*100000)/1000.0);
 					
-					System.out.println("d1: "+Math.round((d1+Math.abs(d1)*0.25)*0.8*100000)/1000.0+" d2:"+Math.round(d2*100000)/1000.0+" d3:"+Math.round(d3*100000)/1000.0+"   ="+Math.round(a));
-					System.out.println("d1: "+Math.round((d1+Math.abs(d1)*0.25)*0.8*100000)/1000.0+" d2:"+Math.round(d2*100000)/1000.0+" d3:"+Math.round(d3*100000)/1000.0+"   ="+Math.round(b));
+					System.out.println("d1: "+d1*44+" d2: "+d2*41+" d3: "+d3*15+" tot: "+(d1*44+d2*41+d3*15));
+					
+					//System.out.println("d1: "+Math.round((d1+Math.abs(d1)*0.25)*0.8*100000)/1000.0+" d2:"+Math.round(d2*100000)/1000.0+" d3:"+Math.round(d3*100000)/1000.0+"   ="+Math.round(a));
+					//System.out.println("d1: "+Math.round((d1+Math.abs(d1)*0.25)*0.8*100000)/1000.0+" d2:"+Math.round(d2*100000)/1000.0+" d3:"+Math.round(d3*100000)/1000.0+"   ="+Math.round(b));
 					System.out.println(RESET+"\n");
 				}
 			}

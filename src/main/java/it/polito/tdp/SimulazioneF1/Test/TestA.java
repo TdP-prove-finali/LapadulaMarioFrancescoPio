@@ -9,8 +9,9 @@ public class TestA {
 	public static void main(String[] args) {
 		
 		Model model = new Model();
+		Track t = model.getAllTracks().get(7);
 
-		for(Track t : model.getAllTracks()) {
+		/*for(Track t : model.getAllTracks()) {
 			
 			SimQ x = new SimQ(t, model.getAllPiloti());
 			ArrayList<Pilota> grid = new ArrayList<Pilota>(x.getGrid());
@@ -18,8 +19,13 @@ public class TestA {
 			SimR y = new SimR(t, model.getAllPiloti(), grid);
 			y.run();
 
-		}
+		}*/
 		
+		SimQ x = new SimQ(t, model.getAllPiloti());
+		ArrayList<Pilota> grid = new ArrayList<Pilota>(x.getGrid());
+		
+		SimR y = new SimR(t, model.getAllPiloti(), grid);
+		y.run();
 		
 	}
 

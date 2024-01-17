@@ -60,8 +60,8 @@ public class SimR {
 			
 			}
 			
-			//System.out.println("\nLAP "+i);
-			//this.printMap(gara);
+			System.out.println("\nLAP "+i);
+			this.printMap(gara);
 			
 		}
 		
@@ -86,7 +86,7 @@ public class SimR {
 				
 					contSorpassiPos++;
 					
-					//System.out.println(YELLOW+p.getCognome()+" PROVA IL SORPASSO SU "+pa.getCognome()+RESET);
+					System.out.println(YELLOW+p.getCognome()+" PROVA IL SORPASSO SU "+pa.getCognome()+RESET);
 					if(this.ActionSorpasso(p, pa)) {
 						
 						contSorpassiOK++;
@@ -98,10 +98,10 @@ public class SimR {
 						//pa resta pa
 						pilotaavanti = this.gara.get(pa); 
 						
-						//System.out.println(BLUE+"SOPRASSO RIUSCITO!"+RESET);
+						System.out.println(BLUE+"SOPRASSO RIUSCITO!"+RESET);
 					}else {
 						
-						//System.out.println(PURPLE+"SOPRASSO NON RIUSCITO!"+RESET);
+						System.out.println(PURPLE+"SOPRASSO NON RIUSCITO!"+RESET);
 						if(this.gara.get(p)!=Double.MAX_VALUE) {
 							
 							this.gara.put(p, this.gara.get(p)+0.5);
@@ -161,19 +161,18 @@ public class SimR {
 					
 				double d3 = (p1.getOvertaking()-p2.getDefending())/p1.getOvertaking();
 				
-				double media = 0.11;
-			    double varianza = 0.02;
+				double media = 0;
+			    double varianza = 0.04;
 			    double deviazioneStandard = Math.sqrt(varianza);
 			
 			    NormalDistribution distribuzioneNormale = new NormalDistribution(media, deviazioneStandard);
-				double dd = distribuzioneNormale.sample();
+			    double dd = distribuzioneNormale.sample()*10+1.8;
 				
-				double a = ((((d1+Math.abs(d1)*0.25)*0.8+d2+d3*1.25)*100000)/1000.0);
-				double b = ((((d1+Math.abs(d1)*0.25)*0.8+d2+d3*1.25+dd)*100000)/1000.0);
+				double a = (d1*0.44+d2*0.41+d3*0.15+dd);
 				
-				//System.out.println(CYAN+p1.getCognome()+": "+a+"   "+p2.getCognome()+": "+b+RESET);
+				System.out.println(CYAN+p1.getCognome()+"   "+p2.getCognome()+": "+a+RESET);
 				
-				return (a-b)>0;
+				return a>0;
 				
 			}
 		
@@ -204,7 +203,7 @@ public class SimR {
         double pp3 = Math.max(-0.1, pp2);
         
         double index = overtake+pp3;
-		//System.out.println(CYAN+"TRY :"+index+"   "+p1.getCognome()+RESET);
+		System.out.println(CYAN+"TRY :"+index+"   "+p1.getCognome()+RESET);
 		
 		return Math.random()<index;
 		
@@ -212,7 +211,7 @@ public class SimR {
 
 	private boolean IncidentePilotaGiro(Pilota p) {
 		
-		double index = (400-p.getAdaptability()-p.getControl()*2-p.getReactions()+p.getAggressivity()/2.25)/100000.0;
+		double index = (450-p.getAdaptability()-p.getControl()*2-p.getReactions()+p.getAggressivity()/2.25)/100000.0;
 		
 		return (Math.random()<index);
 		
@@ -220,7 +219,7 @@ public class SimR {
 
 	private boolean Guasto(Pilota p) {
 		
-		double index = p.getS().getDurability()/10.9;
+		double index = p.getS().getDurability()/200.0;
 		
 		return (Math.random()<index);
 		
@@ -261,7 +260,8 @@ public class SimR {
 		for(Pilota p : grid) {
 			double d1 = t.CalcolaPrestazioneScuderia(p.getS());
         	double d2 = p.getOvr()/100.0;
-        	double d3 = d1*0.71 + d2*0.29;
+        	double d4 = t.getTryeI()/1000.0*(p.getControl()*0.003+p.getSmoothness()*0.007); //calcolo prestazione pilota relativo acircuito (stress della gomma)
+        	double d3 = d1*0.71 + d2*0.29+d4;
         	this.PrestazionePiloti.put(p, d3);
         	if(d3>m1) {
         		m1 = d3;
@@ -274,6 +274,7 @@ public class SimR {
 		double avg = (m1+m2)/2.0;
 		
 		for(Pilota p : this.PrestazionePiloti.keySet()){
+			System.out.println(p.getCognome()+": "+this.PrestazionePiloti.get(p));
 			double tempoP = 1-(this.PrestazionePiloti.get(p)-avg)/4.2;
 			this.PrestazionePiloti.put(p, tempoP);
 		}

@@ -18,10 +18,10 @@ public class CalcoloProbabilita {
     	Model model = new Model();
     		
             double media = 0;
-            double varianza = 0.02;
+            double varianza = 0.04;
             double deviazioneStandard = Math.sqrt(varianza);
 
-            double min = 0;
+            double min = 0.;
             double max =0.2;
 
             NormalDistribution distribuzioneNormale = new NormalDistribution(media, deviazioneStandard);
@@ -31,6 +31,10 @@ public class CalcoloProbabilita {
             double probabilita = distribuzioneNormale.cumulativeProbability(max) - distribuzioneNormale.cumulativeProbability(min);
 
             System.out.println(2*probabilita);
+            
+            for(int i = 0; i<100; i++) {
+            	System.out.println(distribuzioneNormale.sample()*10+1.8);
+            }
             
             
             
