@@ -9,7 +9,7 @@ public class TestA {
 	public static void main(String[] args) {
 		
 		Model model = new Model();
-		Track t = model.getAllTracks().get(7);
+		Track t = model.getAllTracks().get(5);
 
 		/*for(Track t : model.getAllTracks()) {
 			
@@ -26,6 +26,9 @@ public class TestA {
 		
 		SimR y = new SimR(t, model.getAllPiloti(), grid);
 		y.run();
+	
+		
+		
 		
 	}
 

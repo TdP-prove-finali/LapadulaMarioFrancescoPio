@@ -17,23 +17,35 @@ public class CalcoloProbabilita {
 	    
     	Model model = new Model();
     		
-            double media = 0;
-            double varianza = 0.04;
-            double deviazioneStandard = Math.sqrt(varianza);
+    	
+    		
+    		
+    		for(Pilota p : model.getAllPiloti()) {
+    			
+    			double pit = p.getS().getPitTime();
+    			
+	            double media = 0;
+	            double varianza = ((Math.abs(p.getS().getPitCrewValue()-m))/0.07)+0.1;
+	            double deviazioneStandard = Math.sqrt(varianza);
 
-            double min = 0.;
-            double max =0.2;
+	            double min = 0;
+	            double max =1;
+	            
 
-            NormalDistribution distribuzioneNormale = new NormalDistribution(media, deviazioneStandard);
-            
+	            NormalDistribution distribuzioneNormale = new NormalDistribution(media, deviazioneStandard);
+	            
 
-            // Calcolo della probabilità
-            double probabilita = distribuzioneNormale.cumulativeProbability(max) - distribuzioneNormale.cumulativeProbability(min);
+	            // Calcolo della probabilità
+	            double probabilita = distribuzioneNormale.cumulativeProbability(max) - distribuzioneNormale.cumulativeProbability(min);
 
-            System.out.println(2*probabilita);
+	            System.out.println(p.getCognome()+" "+varianza+" "+2*probabilita);
+    			
+    		}
+    		
+
             
             for(int i = 0; i<100; i++) {
-            	System.out.println(distribuzioneNormale.sample()*10+1.8);
+            	//System.out.println(distribuzioneNormale.sample()*10+1.8);
             }
             
             

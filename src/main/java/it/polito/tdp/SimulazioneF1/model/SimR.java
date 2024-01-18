@@ -27,6 +27,12 @@ public class SimR {
 	ArrayList<Pilota> grid;
 	Map<Pilota, Double> PrestazionePiloti;
 	
+	
+	int NPit = 2;
+	int stint;
+	double PitCrewMax;
+	boolean pioggia;
+	
 	public SimR(Track t, List<Pilota> lista, List<Pilota> grid) {
 		this.t = t;
 		this.grid = new ArrayList<>(grid);
@@ -35,7 +41,11 @@ public class SimR {
 			this.gara.put(p, 0.0);
 		}
 		this.init();
+		this.stint = (t.getNGiri()+3)/(NPit+1);
+		this.PitCrewMax();
+		this.pioggia = this.pioggia();
 	}
+	
 	
 	//variabili provvisorie
 	
@@ -50,7 +60,13 @@ public class SimR {
 		
 		this.partenza();
 		
-		for(int i = 1; i<t.getNGiri(); i++) {
+		for(int i = 1; i<=t.getNGiri(); i++) {
+			
+			if(i%stint==0) {
+				this.pitstop();
+				this.gara = new LinkedHashMap<>(this.riordina(gara));
+			}
+			
 			this.simulaGiro();
 			
 			if(i>3) {
@@ -92,8 +108,11 @@ public class SimR {
 						contSorpassiOK++;
 						
 						//se il sorpasso viene completato assegno al pilota dietro il tempo di gara del pilota davanti e li distanzio di 1.1 secondi
-						this.gara.put(p, this.gara.put(pa, this.gara.get(p)));
-						this.gara.put(p, this.gara.get(p)+1.1);
+						//this.gara.put(p, this.gara.put(pa, this.gara.get(p)));
+						//this.gara.put(p, this.gara.get(p)+1.1);
+						
+						this.gara.put(p, this.gara.get(pa));
+						this.gara.put(pa, this.gara.get(p)+1.1);
 						
 						//pa resta pa
 						pilotaavanti = this.gara.get(pa); 
@@ -104,7 +123,7 @@ public class SimR {
 						System.out.println(PURPLE+"SOPRASSO NON RIUSCITO!"+RESET);
 						if(this.gara.get(p)!=Double.MAX_VALUE) {
 							
-							this.gara.put(p, this.gara.get(p)+0.5);
+							this.gara.put(p, this.gara.get(p)+0.7);
 							
 						}						
 						
@@ -166,7 +185,7 @@ public class SimR {
 			    double deviazioneStandard = Math.sqrt(varianza);
 			
 			    NormalDistribution distribuzioneNormale = new NormalDistribution(media, deviazioneStandard);
-			    double dd = distribuzioneNormale.sample()*10+1.8;
+			    double dd = distribuzioneNormale.sample()*10+1.5;
 				
 				double a = (d1*0.44+d2*0.41+d3*0.15+dd);
 				
@@ -257,11 +276,19 @@ public class SimR {
 		double m1 = 0.0;
 		double m2 = Double.MAX_VALUE;
 		
+		
 		for(Pilota p : grid) {
 			double d1 = t.CalcolaPrestazioneScuderia(p.getS());
         	double d2 = p.getOvr()/100.0;
         	double d4 = t.getTryeI()/1000.0*(p.getControl()*0.003+p.getSmoothness()*0.007); //calcolo prestazione pilota relativo acircuito (stress della gomma)
-        	double d3 = d1*0.71 + d2*0.29+d4;
+        	double d3;
+        	
+        	if(pioggia) {
+        		d3 = d1*0.52 + d2*0.21 + d4*0.5 + p.getAdaptability()*0.0027;
+        	}else {
+        		d3 = d1*0.71 + d2*0.29+d4;
+        	}
+        	 
         	this.PrestazionePiloti.put(p, d3);
         	if(d3>m1) {
         		m1 = d3;
@@ -274,7 +301,6 @@ public class SimR {
 		double avg = (m1+m2)/2.0;
 		
 		for(Pilota p : this.PrestazionePiloti.keySet()){
-			System.out.println(p.getCognome()+": "+this.PrestazionePiloti.get(p));
 			double tempoP = 1-(this.PrestazionePiloti.get(p)-avg)/4.2;
 			this.PrestazionePiloti.put(p, tempoP);
 		}
@@ -330,10 +356,15 @@ public class SimR {
 		if(this.gara.get(p)!=Double.MAX_VALUE) {
 		
 		this.gara.put(p, Double.MAX_VALUE);
-		//System.out.println(RED+"INCIDENTE DI "+p.getCognome()+RESET);
+		System.out.println(RED+"INCIDENTE DI "+p.getCognome()+RESET);
 		
 		}
 		
+	}
+	
+	private boolean pioggia() {	
+		
+		return Math.random()<t.getRainProbability();
 	}
 	
 	private void printMap(Map<Pilota, Double> mappa) {
@@ -350,4 +381,54 @@ public class SimR {
 		
 		System.out.println();
 	}
+	
+	private void pitstop() {
+		
+		for(Pilota p : this.gara.keySet()) {
+			
+			if(this.gara.get(p)!=Double.MAX_VALUE) {
+    			
+	            double media = 0;
+	            double varianza = ((Math.abs(p.getS().getPitCrewValue()-this.getPitCrewMax()))/0.07)+0.1;
+	            double deviazioneStandard = Math.sqrt(varianza);	            
+
+	            NormalDistribution distribuzioneNormale = new NormalDistribution(media, deviazioneStandard);
+				
+	            double pit = p.getS().getPitTime();
+	            double aggiunta = Math.abs(distribuzioneNormale.sample());
+	            double pitT = aggiunta + pit + t.getTempoPitLane();
+				double newrecord = this.gara.get(p) + pitT;
+				System.out.println("PIT STOP: "+p.getCognome()+" "+pitT);
+				this.gara.put(p, newrecord);
+				
+			}
+			
+		}
+		//aggiungere tempo pit preso da tabella circuito + tempo pit squadra + variabile casuale dipendente dalla qualità della pit crew
+		
+	}
+	
+	private void PitCrewMax() {
+		
+		this.PitCrewMax = 0;
+		
+		for(Pilota p : this.gara.keySet()) {
+			if(p.getS().getPitCrewValue()>this.PitCrewMax) {
+				this.PitCrewMax = p.getS().getPitCrewValue();
+			}
+		}
+	}
+
+
+	public int getStint() {
+		return stint;
+	}
+
+	
+
+	public double getPitCrewMax() {
+		return PitCrewMax;
+	}
+
+	
 }
