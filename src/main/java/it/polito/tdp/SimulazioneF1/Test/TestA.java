@@ -21,11 +21,16 @@ public class TestA {
 
 		}*/
 		
-		SimQ x = new SimQ(t, model.getAllPiloti());
+		/*SimQ x = new SimQ(t, model.getAllPiloti());
 		ArrayList<Pilota> grid = new ArrayList<Pilota>(x.getGrid());
 		
 		SimR y = new SimR(t, model.getAllPiloti(), grid);
-		y.run();
+		y.run();*/
+		
+		Sim s = new Sim(model);
+		s.init();
+		s.run();
+		System.out.println(s.printClassificaPiloti());
 	
 		
 		

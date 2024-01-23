@@ -57,6 +57,7 @@ public class SimR {
 	public void run() {
 		
 		System.out.println(t.getNome()+"    "+t.getOverI());
+		System.out.println("PIOGGIA: "+this.pioggia);
 		
 		this.partenza();
 		
@@ -76,8 +77,9 @@ public class SimR {
 			
 			}
 			
+			if(i==t.getNGiri()) {
 			System.out.println("\nLAP "+i);
-			this.printMap(gara);
+			this.printMap(gara);}
 			
 		}
 		
@@ -93,17 +95,16 @@ public class SimR {
 		Pilota pa = null;
 		//pa è il pilota davanti
 		
-		for(Pilota p : gara.keySet()) {
+		for(Pilota pd : gara.keySet()) {
 			
-			//da testare, non so se funziona bene il DNF
-			if(this.gara.get(p)!=Double.MAX_VALUE && pilotaavanti!=Double.MAX_VALUE) {
+			if(this.gara.get(pd)!=Double.MAX_VALUE && pilotaavanti!=Double.MAX_VALUE) {
 				
-				if((gara.get(p)-pilotaavanti)<=1.0) {
+				if((gara.get(pd)-pilotaavanti)<=1.0) {
 				
 					contSorpassiPos++;
 					
-					System.out.println(YELLOW+p.getCognome()+" PROVA IL SORPASSO SU "+pa.getCognome()+RESET);
-					if(this.ActionSorpasso(p, pa)) {
+					//System.out.println(YELLOW+pd.getCognome()+" PROVA IL SORPASSO SU "+pa.getCognome()+RESET);
+					if(this.ActionSorpasso(pd, pa)) {
 						
 						contSorpassiOK++;
 						
@@ -111,30 +112,31 @@ public class SimR {
 						//this.gara.put(p, this.gara.put(pa, this.gara.get(p)));
 						//this.gara.put(p, this.gara.get(p)+1.1);
 						
-						this.gara.put(p, this.gara.get(pa));
-						this.gara.put(pa, this.gara.get(p)+1.1);
+						this.gara.put(pd, this.gara.get(pa));
+						this.gara.put(pa, this.gara.get(pd)+1.0);
 						
 						//pa resta pa
 						pilotaavanti = this.gara.get(pa); 
 						
-						System.out.println(BLUE+"SOPRASSO RIUSCITO!"+RESET);
+						//System.out.println(BLUE+"SOPRASSO RIUSCITO!"+RESET);
 					}else {
 						
-						System.out.println(PURPLE+"SOPRASSO NON RIUSCITO!"+RESET);
-						if(this.gara.get(p)!=Double.MAX_VALUE) {
+						//System.out.println(PURPLE+"SOPRASSO NON RIUSCITO!"+RESET);
+						if(this.gara.get(pd)!=Double.MAX_VALUE) {
 							
-							this.gara.put(p, this.gara.get(p)+0.7);
+							//problema
+							this.gara.put(pd, this.gara.get(pa)+0.85);
 							
 						}						
 						
-						pa = p;
+						pa = pd;
 						pilotaavanti = this.gara.get(pa);
 						
 					}
 					
 				}else {
 				
-				pa = p;
+				pa = pd;
 				pilotaavanti = this.gara.get(pa);
 				
 				}
@@ -189,7 +191,7 @@ public class SimR {
 				
 				double a = (d1*0.44+d2*0.41+d3*0.15+dd);
 				
-				System.out.println(CYAN+p1.getCognome()+"   "+p2.getCognome()+": "+a+RESET);
+				//System.out.println(CYAN+p1.getCognome()+"   "+p2.getCognome()+": "+a+RESET);
 				
 				return a>0;
 				
@@ -222,7 +224,7 @@ public class SimR {
         double pp3 = Math.max(-0.1, pp2);
         
         double index = overtake+pp3;
-		System.out.println(CYAN+"TRY :"+index+"   "+p1.getCognome()+RESET);
+		//System.out.println(CYAN+"TRY :"+index+"   "+p1.getCognome()+RESET);
 		
 		return Math.random()<index;
 		
@@ -284,7 +286,7 @@ public class SimR {
         	double d3;
         	
         	if(pioggia) {
-        		d3 = d1*0.52 + d2*0.21 + d4*0.5 + p.getAdaptability()*0.0027;
+        		d3 = d1*0.48 + d2*0.22 + d4*0.5 + p.getAdaptability()*0.0029;
         	}else {
         		d3 = d1*0.71 + d2*0.29+d4;
         	}
@@ -356,7 +358,7 @@ public class SimR {
 		if(this.gara.get(p)!=Double.MAX_VALUE) {
 		
 		this.gara.put(p, Double.MAX_VALUE);
-		System.out.println(RED+"INCIDENTE DI "+p.getCognome()+RESET);
+		//System.out.println(RED+"INCIDENTE DI "+p.getCognome()+RESET);
 		
 		}
 		
@@ -398,7 +400,7 @@ public class SimR {
 	            double aggiunta = Math.abs(distribuzioneNormale.sample());
 	            double pitT = aggiunta + pit + t.getTempoPitLane();
 				double newrecord = this.gara.get(p) + pitT;
-				System.out.println("PIT STOP: "+p.getCognome()+" "+pitT);
+				//System.out.println("PIT STOP: "+p.getCognome()+" "+pitT);
 				this.gara.put(p, newrecord);
 				
 			}
@@ -419,15 +421,29 @@ public class SimR {
 		}
 	}
 
-
 	public int getStint() {
 		return stint;
 	}
 
-	
-
 	public double getPitCrewMax() {
 		return PitCrewMax;
+	}
+
+	public LinkedHashMap<Pilota, Integer> getResult() {
+		
+		LinkedHashMap<Pilota, Integer> posizioni = new LinkedHashMap<>();
+		
+		int i = 0;
+		
+		for(Pilota p : this.gara.keySet()) {
+			
+			posizioni.put(p, i);
+			i++;
+			
+		}
+		
+		return posizioni;
+		
 	}
 
 	

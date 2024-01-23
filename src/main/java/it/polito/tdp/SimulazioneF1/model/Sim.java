@@ -1,6 +1,8 @@
 package it.polito.tdp.SimulazioneF1.model;
 
 import java.util.*;
+import java.util.Map.Entry;
+
 import it.polito.tdp.SimulazioneF1.model.Sessione.evento;
 
 public class Sim {
@@ -10,7 +12,8 @@ public class Sim {
 	HashMap<Pilota, Integer> classificaPiloti;
 	HashMap<Scuderia, Integer> classificaCostruttori;
 	
-	List<Sessione> recap; //qui inserisco tutte le sessioni così da poyerle stampare all'occorrenza
+	List<Sessione> recap; //qui inserisco tutte le sessioni così da poterle stampare all'occorrenza
+	//mi sa che non è il top
 	
 	public Sim(Model model) {
 		super();
@@ -53,15 +56,17 @@ public class Sim {
 				break;
 			case GARA:
 				SimR y = new SimR(s.getN(), model.getAllPiloti(), grid);
-				HashMap<Pilota, Integer> result = y.getResult();
+				y.run();
+				LinkedHashMap<Pilota, Integer> result = y.getResult();
 				this.loadResult(result);
-				recap.add(s);
+				recap.add(s);//che significa?
 				break;
 		}	
 	}
 	
 	//ATTENTO AGLI INDICI DI RISULTATI FINALI
-	public void loadResult(HashMap<Pilota, Integer> result) {
+	public void loadResult(LinkedHashMap<Pilota, Integer> result) {
+		
 		for(Pilota p : this.classificaPiloti.keySet()) {
 			int posizione = result.get(p);
 			Scuderia s = p.getS();
@@ -108,6 +113,42 @@ public class Sim {
 				break;
 			}
 		}
+	}
+	
+	public String printClassificaPiloti() {
+		
+		String s = "";
+		int i = 1;
+		LinkedHashMap<Pilota, Integer> ordinata = new LinkedHashMap<>(this.riordina(classificaPiloti));
+		
+		for(Pilota p : ordinata.keySet()) {
+			
+			s += i+") "+p.getCognome()+" :"+ordinata.get(p)+"\n";
+			
+			i++;
+			
+		}
+		
+		return s;
+		
+	}
+	
+	private Map<Pilota, Integer> riordina(Map<Pilota, Integer> mappa) {
+		
+		ArrayList<Entry<Pilota,Integer>> lista = new ArrayList<>(mappa.entrySet());
+		
+		// Ordina la lista in base ai valori delle chiavi (in ordine decrescente)
+	    Collections.sort(lista, new ComparatorClassifica());
+
+	    // Ricostruisci la mappa ordinata
+	    LinkedHashMap<Pilota, Integer> mappaordinata = new LinkedHashMap<>();
+	    
+	    for (Map.Entry<Pilota, Integer> entry : lista) {
+	        mappaordinata.put(entry.getKey(), entry.getValue());
+	    }
+	    
+	    return mappaordinata;
+	    
 	}
 	
 	
