@@ -132,12 +132,7 @@ public class Scuderia {
 
 	@Override
 	public String toString() {
-		return "Scuderia [id=" + id + ", name=" + name + ", tag=" + tag + ", PilotaID1=" + PilotaID1 + ", PilotaID2="
-				+ PilotaID2 + ", RaceEngineerValue=" + RaceEngineerValue + ", TechnicalChiefValue="
-				+ TechnicalChiefValue + ", HeadofAerodynamicsValue=" + HeadofAerodynamicsValue
-				+ ", SportingDirectorValue=" + SportingDirectorValue + ", PitCrewValue=" + PitCrewValue + ", PitTime="
-				+ PitTime + ", durability=" + durability + ", chassis=" + chassis + ", aerodynamics=" + aerodynamics
-				+ ", powertrains=" + powertrains + ", aerI=" + aerI + ", chaI=" + chaI + ", engI=" + engI + "]";
+		return this.getName();
 	}
 	
 	

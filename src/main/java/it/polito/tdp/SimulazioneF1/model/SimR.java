@@ -232,7 +232,7 @@ public class SimR {
 
 	private boolean IncidentePilotaGiro(Pilota p) {
 		
-		double index = (450-p.getAdaptability()-p.getControl()*2-p.getReactions()+p.getAggressivity()/2.25)/100000.0;
+		double index = (450-p.getAdaptability()*1.1-p.getControl()*2-p.getReactions()*1.1+p.getAggressivity()/2.3)/100000.0;
 		
 		return (Math.random()<index);
 		
@@ -240,7 +240,7 @@ public class SimR {
 
 	private boolean Guasto(Pilota p) {
 		
-		double index = p.getS().getDurability()/200.0;
+		double index = p.getS().getDurability()/225.0;
 		
 		return (Math.random()<index);
 		
@@ -290,8 +290,11 @@ public class SimR {
         	}else {
         		d3 = d1*0.71 + d2*0.29+d4;
         	}
-        	 
-        	this.PrestazionePiloti.put(p, d3);
+        	
+        	NormalDistribution distribuzioneNormale = new NormalDistribution(0, 3.5);
+        	
+        	this.PrestazionePiloti.put(p, d3*(1+distribuzioneNormale.sample()/1000));
+        	
         	if(d3>m1) {
         		m1 = d3;
         	}
@@ -309,6 +312,10 @@ public class SimR {
 		
 	}
 	
+	public Map<Pilota, Double> getPrestazionePiloti() {
+		return PrestazionePiloti;
+	}
+
 	private void simulaGiro() {
 		
 		double tempo = t.getTempoMedioGiro();
@@ -321,8 +328,8 @@ public class SimR {
 				
 			}else {
 				
-	        NormalDistribution distribuzioneNormale = new NormalDistribution(tempo*this.PrestazionePiloti.get(p), Math.sqrt(0.024));
-			double x = distribuzioneNormale.sample();
+	        NormalDistribution distribuzioneNormale = new NormalDistribution(tempo*this.PrestazionePiloti.get(p), 0.16);
+			double x = distribuzioneNormale.sample();			
 			
 			double newrecord = this.gara.get(p) + x;
 			this.gara.put(p, newrecord);
@@ -334,7 +341,7 @@ public class SimR {
 	}
 	
 	//riordina la mappa passata in input e riproduce la classifica di gara
-	private Map<Pilota, Double> riordina(Map<Pilota, Double> mappa) {
+	public Map<Pilota, Double> riordina(Map<Pilota, Double> mappa) {
 		
 		ArrayList<Entry<Pilota,Double>> lista = new ArrayList<>(mappa.entrySet());
 		
@@ -358,7 +365,7 @@ public class SimR {
 		if(this.gara.get(p)!=Double.MAX_VALUE) {
 		
 		this.gara.put(p, Double.MAX_VALUE);
-		//System.out.println(RED+"INCIDENTE DI "+p.getCognome()+RESET);
+		System.out.println(RED+"INCIDENTE DI "+p.getCognome()+RESET);
 		
 		}
 		
@@ -400,13 +407,11 @@ public class SimR {
 	            double aggiunta = Math.abs(distribuzioneNormale.sample());
 	            double pitT = aggiunta + pit + t.getTempoPitLane();
 				double newrecord = this.gara.get(p) + pitT;
-				//System.out.println("PIT STOP: "+p.getCognome()+" "+pitT);
 				this.gara.put(p, newrecord);
 				
 			}
 			
 		}
-		//aggiungere tempo pit preso da tabella circuito + tempo pit squadra + variabile casuale dipendente dalla qualità della pit crew
 		
 	}
 	

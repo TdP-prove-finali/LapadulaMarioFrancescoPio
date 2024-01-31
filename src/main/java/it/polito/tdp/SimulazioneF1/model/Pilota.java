@@ -1,6 +1,6 @@
 package it.polito.tdp.SimulazioneF1.model;
 
-public class Pilota {
+public class Pilota implements Comparable<Pilota>{
 	
 	int ID;
 	String nome;
@@ -98,10 +98,12 @@ public class Pilota {
 
 	@Override
 	public String toString() {
-		return "Pilota [ID=" + ID + ", nome=" + nome + ", cognome=" + cognome + ", nazione=" + nazione + ", s=" + s
-				+ ", GPs=" + GPs + ", ovr=" + ovr + ", reactions=" + reactions + ", control=" + control
-				+ ", smoothness=" + smoothness + ", adaptability=" + adaptability + ", overtaking=" + overtaking
-				+ ", defending=" + defending + ", aggressivity=" + aggressivity + "]";
+		return this.getNome()+" "+this.getCognome();
+	}
+
+	@Override
+	public int compareTo(Pilota o) {
+		return this.getID()-o.getID();
 	}
 	
 	

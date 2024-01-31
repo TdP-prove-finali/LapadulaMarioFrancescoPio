@@ -9,7 +9,6 @@ public class TestA {
 	public static void main(String[] args) {
 		
 		Model model = new Model();
-		Track t = model.getAllTracks().get(5);
 
 		/*for(Track t : model.getAllTracks()) {
 			
@@ -31,6 +30,7 @@ public class TestA {
 		s.init();
 		s.run();
 		System.out.println(s.printClassificaPiloti());
+		System.out.println(s.printClassificaCostruttori());
 	
 		
 		

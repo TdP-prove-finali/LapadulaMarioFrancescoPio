@@ -132,13 +132,31 @@ public class Sim {
 		return s;
 		
 	}
+
+	public String printClassificaCostruttori() {
+		
+		String s = "";
+		int i = 1;
+		LinkedHashMap<Scuderia, Integer> ordinata = new LinkedHashMap<>(this.riordinaa(classificaCostruttori));
+		
+		for(Scuderia ss : ordinata.keySet()) {
+			
+			s += i+") "+ss.getName()+" :"+ordinata.get(ss)+"\n";
+			
+			i++;
+			
+		}
+		
+		return s;
+		
+	}
 	
 	private Map<Pilota, Integer> riordina(Map<Pilota, Integer> mappa) {
 		
 		ArrayList<Entry<Pilota,Integer>> lista = new ArrayList<>(mappa.entrySet());
 		
 		// Ordina la lista in base ai valori delle chiavi (in ordine decrescente)
-	    Collections.sort(lista, new ComparatorClassifica());
+	    Collections.sort(lista, new ComparatorClassificaPiloti());
 
 	    // Ricostruisci la mappa ordinata
 	    LinkedHashMap<Pilota, Integer> mappaordinata = new LinkedHashMap<>();
@@ -150,6 +168,23 @@ public class Sim {
 	    return mappaordinata;
 	    
 	}
-	
+
+	private Map<Scuderia, Integer> riordinaa(Map<Scuderia, Integer> mappa) {
+		
+		ArrayList<Entry<Scuderia,Integer>> lista = new ArrayList<>(mappa.entrySet());
+		
+		// Ordina la lista in base ai valori delle chiavi (in ordine decrescente)
+	    Collections.sort(lista, new ComparatorClassificaCostruttori());
+
+	    // Ricostruisci la mappa ordinata
+	    LinkedHashMap<Scuderia, Integer> mappaordinata = new LinkedHashMap<>();
+	    
+	    for (Map.Entry<Scuderia, Integer> entry : lista) {
+	        mappaordinata.put(entry.getKey(), entry.getValue());
+	    }
+	    
+	    return mappaordinata;
+	    
+	}
 	
 }

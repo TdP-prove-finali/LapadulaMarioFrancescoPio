@@ -4,7 +4,7 @@ import java.util.Comparator;
 import java.util.Map;
 import java.util.Map.Entry;
 
-public class ComparatorClassifica implements Comparator<Map.Entry<Pilota, Integer>>{
+public class ComparatorClassificaPiloti implements Comparator<Map.Entry<Pilota, Integer>>{
 
 
 	@Override

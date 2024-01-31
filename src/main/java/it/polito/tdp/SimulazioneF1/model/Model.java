@@ -30,6 +30,20 @@ public class Model {
 		return new ArrayList<Track>(circuiti.values());
 	}
 	
+	public void Scambio(Pilota p, Pilota nuovo) {
+		
+		if(p.getS().equals(nuovo.getS())) {
+			return;
+		}else {
+			Scuderia ss = nuovo.getS();
+			Scuderia s = p.getS();
+			
+			nuovo.setS(s);
+			p.setS(ss);
+		}
+		
+	}
+	
 	
 	
 
