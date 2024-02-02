@@ -130,6 +130,28 @@ public class Scuderia {
 		return this.chaI+this.aerI+this.engI;
 	}
 
+	public void addChass(double d) {
+		this.chaI += d;
+	}
+	
+	public void addDura(double d) {
+		this.durability += d;
+	}
+	
+	public void addPower(double d) {
+		this.engI += d;
+	}
+	
+	public void addAero(double d) {
+		this.aerI += d;
+	}
+	
+	//ANCORA DA SVILUPPARE
+	public void addPit(double d) {
+		this.aerI += d;
+	}
+	
+	
 	@Override
 	public String toString() {
 		return this.getName();

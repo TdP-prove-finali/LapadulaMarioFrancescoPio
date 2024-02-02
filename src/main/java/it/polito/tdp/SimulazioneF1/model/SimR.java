@@ -84,9 +84,9 @@ public class SimR {
 		}
 		
 		
-		System.out.println("Numero sorpassi possibili: "+contSorpassiPos+"\nNumero sorpassi riusciti: "+contSorpassiOK+"\nNumero sorpassi non riusciti: "+(contSorpassiPos-contNO-contSorpassiOK)+"\nNumero sorpassi non tentati: "+contNO);
-		double perc = (1-((double)(contNO))/(double)(contSorpassiPos));
-		System.out.println(perc);
+		//System.out.println("Numero sorpassi possibili: "+contSorpassiPos+"\nNumero sorpassi riusciti: "+contSorpassiOK+"\nNumero sorpassi non riusciti: "+(contSorpassiPos-contNO-contSorpassiOK)+"\nNumero sorpassi non tentati: "+contNO);
+		//double perc = (1-((double)(contNO))/(double)(contSorpassiPos));
+		//System.out.println(perc);
 	}
 	
 	private void checksorpassi() {

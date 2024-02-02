@@ -26,15 +26,15 @@ public class TestA {
 		SimR y = new SimR(t, model.getAllPiloti(), grid);
 		y.run();*/
 		
+	
+		Scuderia ss = model.getAllScuderie().get(4);
+		Investimento i = new Investimento(ss, 0, 0, 0, 140, 0);
+		
 		Sim s = new Sim(model);
 		s.init();
 		s.run();
 		System.out.println(s.printClassificaPiloti());
 		System.out.println(s.printClassificaCostruttori());
-	
-		
-		
-		
 	}
 
 }

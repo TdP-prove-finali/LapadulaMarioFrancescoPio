@@ -8,6 +8,7 @@ import java.util.Map.Entry;
 
 import it.polito.tdp.SimulazioneF1.db.F1DAO;
 import it.polito.tdp.SimulazioneF1.model.Comparator1;
+import it.polito.tdp.SimulazioneF1.model.Model;
 import it.polito.tdp.SimulazioneF1.model.Scuderia;
 import org.apache.commons.math3.distribution.NormalDistribution;
 
@@ -22,12 +23,24 @@ public class IndiciCircuiti {
 
 	double q1 = 0.360; double q2 = 0.305; double q3 = 0.490; double q4 = 0.155; double q5 = 0.125; double q6 = 0.185;
 	//double q1 = 0.8; double q2 = 0; double q3 = 0.2; double q4 = 0; double q5 = 0; double q6 = 0;
-	
-	F1DAO dao = new F1DAO();
+
+	Model model = new Model();
 	
 	HashMap<Scuderia, Double> mappa = new HashMap<>();
-
-	for(Scuderia s : dao.getAllScuderia().values()) {
+	
+	Scuderia t = model.getAllScuderie().get(0);
+	
+    Scuderia ss = model.getAllScuderie().get(4);
+    
+	System.out.println(RED+ss.getName()+RESET+" "+Math.round(ss.getAerI()*1000)/1000.0+"   "+Math.round(ss.getChaI()*1000)/1000.0+"   "+Math.round(ss.getEngI()*1000)/1000.0);
+    System.out.println(GREEN+(0.130*(1+(t.getTotOVR()/ss.getTotOVR()-1)/2))+RESET);
+	ss.addAero(0.130*t.getTotOVR()/ss.getTotOVR());
+    	
+    	
+    
+    
+    
+	for(Scuderia s : model.getAllScuderie()) {
 		double r = s.getAerI()*q1+s.getChaI()*q2+s.getEngI()*q3+q4*s.getAerI()*s.getChaI()+q5*s.getAerI()*s.getEngI()+q6*s.getEngI()*s.getChaI();
 		r = Math.round(r*1000);
 		mappa.put(s, r);
@@ -44,15 +57,17 @@ public class IndiciCircuiti {
         mappaOrdinata.put(entry.getKey(), entry.getValue());
     }
 
+
+    
     double k = 0;
     for (Scuderia s : mappaOrdinata.keySet()) {
     	double diff = Math.abs(mappaOrdinata.get(s) - k);
     	if(diff<=3) {//RED
-    		System.out.println(RED +s.getTag()+" - "+mappaOrdinata.get(s)+"   "+Math.round(s.getAerI()*1000)/1000.0+"   "+Math.round(s.getChaI()*1000)/1000.0+"   "+Math.round(s.getEngI()*1000)/1000.0+"  -  "+Math.round(s.getTotOVR()*1000)/1000.0+ RESET);
+    		System.out.println(s.getTag()+" - "+mappaOrdinata.get(s)+"   "+Math.round(s.getAerI()*1000)/1000.0+"   "+Math.round(s.getChaI()*1000)/1000.0+"   "+Math.round(s.getEngI()*1000)/1000.0+"  -  "+Math.round(s.getTotOVR()*1000)/1000.0);
     	}else if(diff<=7) {//BLUE
-    		System.out.println(BLUE +s.getTag()+" - "+mappaOrdinata.get(s)+"   "+Math.round(s.getAerI()*1000)/1000.0+"   "+Math.round(s.getChaI()*1000)/1000.0+"   "+Math.round(s.getEngI()*1000)/1000.0+"  -  "+Math.round(s.getTotOVR()*1000)/1000.0+ RESET);
+    		System.out.println(s.getTag()+" - "+mappaOrdinata.get(s)+"   "+Math.round(s.getAerI()*1000)/1000.0+"   "+Math.round(s.getChaI()*1000)/1000.0+"   "+Math.round(s.getEngI()*1000)/1000.0+"  -  "+Math.round(s.getTotOVR()*1000)/1000.0);
     	}else if(diff>=35 && k!=0) {//GREEN
-    		System.out.println(GREEN +s.getTag()+" - "+mappaOrdinata.get(s)+"   "+Math.round(s.getAerI()*1000)/1000.0+"   "+Math.round(s.getChaI()*1000)/1000.0+"   "+Math.round(s.getEngI()*1000)/1000.0+"  -  "+Math.round(s.getTotOVR()*1000)/1000.0+ RESET);
+    		System.out.println(s.getTag()+" - "+mappaOrdinata.get(s)+"   "+Math.round(s.getAerI()*1000)/1000.0+"   "+Math.round(s.getChaI()*1000)/1000.0+"   "+Math.round(s.getEngI()*1000)/1000.0+"  -  "+Math.round(s.getTotOVR()*1000)/1000.0);
     	}else {
     		System.out.println(s.getTag()+" - "+mappaOrdinata.get(s)+"   "+Math.round(s.getAerI()*1000)/1000.0+"   "+Math.round(s.getChaI()*1000)/1000.0+"   "+Math.round(s.getEngI()*1000)/1000.0+"  -  "+Math.round(s.getTotOVR()*1000)/1000.0);
     	}

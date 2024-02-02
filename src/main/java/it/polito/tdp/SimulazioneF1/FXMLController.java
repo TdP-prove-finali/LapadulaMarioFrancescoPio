@@ -126,7 +126,33 @@ public class FXMLController {
 
     @FXML
     void DoInvestimento(ActionEvent event) {
-
+    	
+    	String aero = this.text1.getText();
+    	String telaio = this.text2.getText();
+    	String pit = this.text3.getText();
+    	String motore = this.text4.getText();
+    	String aff = this.text5.getText();
+    	
+    	try {
+    		int Aero = Integer.parseInt(aero);
+    		int Telaio = Integer.parseInt(telaio);
+    		int Pit = Integer.parseInt(pit);
+    		int Motore = Integer.parseInt(motore);
+    		int Aff = Integer.parseInt(aff);
+    		
+    		if((Aero+Telaio+Aff+Pit+Motore)>140) {
+    			this.Segnalazione.appendText("Inserire importi la cui somma sia minore o uguale al limite imposto dal Budget Cup pari a 140 Milioni.");
+    			return;
+    		}else {
+    			//fai investimento
+    		}
+    		
+    		
+    	}catch(NumberFormatException e) {
+    		e.printStackTrace();
+    		this.Segnalazione.appendText("I dati inseriti sono errati.\nInserire numeri interi.");
+    	} 
+    	
     }
     
     @FXML
