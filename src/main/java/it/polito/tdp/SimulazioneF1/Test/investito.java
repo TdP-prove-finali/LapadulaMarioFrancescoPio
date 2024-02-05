@@ -1,10 +1,11 @@
-package it.polito.tdp.SimulazioneF1.model;
+package it.polito.tdp.SimulazioneF1.Test;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Map.Entry;
+import it.polito.tdp.SimulazioneF1.model.*;;
 
 public class investito {
 

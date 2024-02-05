@@ -11,17 +11,23 @@ public class Sim {
 	Queue<Sessione> queue;
 	HashMap<Pilota, Integer> classificaPiloti;
 	HashMap<Scuderia, Integer> classificaCostruttori;
+	ArrayList<Pilota> piloti;
+	ArrayList<Scuderia> scuderie;
 	
 	List<Sessione> recap; //qui inserisco tutte le sessioni così da poterle stampare all'occorrenza
 	//mi sa che non è il top
 	
-	public Sim(Model model) {
+	public Sim(Model model, List<Pilota> piloti, List<Scuderia> scuderie) {
 		super();
 		this.model = model;
+		
+		this.piloti = new ArrayList<>(piloti);
+		this.scuderie = new ArrayList<>(scuderie);
+		
 		this.classificaPiloti = new HashMap<>();
 		this.classificaCostruttori = new HashMap<Scuderia, Integer>();
 		queue = new PriorityQueue<>();
-		recap = new ArrayList<>();
+		//recap = new ArrayList<>();
 	}
 
 	public void init() {
@@ -30,11 +36,11 @@ public class Sim {
 			queue.add(new Sessione(t, evento.GARA));
 		}
 		
-		for(Pilota p : model.getAllPiloti()) {
+		for(Pilota p : this.piloti) {
 			this.classificaPiloti.put(p, 0);
 		}
 		
-		for(Scuderia s : model.getAllScuderie()) {
+		for(Scuderia s : this.scuderie) {
 			this.classificaCostruttori.put(s, 0);
 		}
 		
@@ -51,11 +57,11 @@ public class Sim {
 	public void process(Sessione s) {
 		switch(s.getType()) {
 			case QUALIFICA:
-				SimQ x = new SimQ(s.getN(), model.getAllPiloti());
+				SimQ x = new SimQ(s.getN(), this.piloti);
 				grid = new ArrayList<Pilota>(x.getGrid());
 				break;
 			case GARA:
-				SimR y = new SimR(s.getN(), model.getAllPiloti(), grid);
+				SimR y = new SimR(s.getN(), this.piloti, grid);
 				y.run();
 				LinkedHashMap<Pilota, Integer> result = y.getResult();
 				this.loadResult(result);

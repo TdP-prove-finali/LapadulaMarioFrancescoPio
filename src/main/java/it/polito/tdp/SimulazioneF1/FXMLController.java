@@ -1,6 +1,7 @@
 package it.polito.tdp.SimulazioneF1;
 
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.LinkedList;
 import java.util.ResourceBundle;
@@ -64,12 +65,10 @@ public class FXMLController {
 
     @FXML
     private TextField text5;
-
-    @FXML
-    private TextField text6;
     
     Pilota p1;
     Pilota p2;
+    ArrayList<Integer> investimenti;
 
     public Pilota getP1() {
 		return p1;
@@ -91,6 +90,36 @@ public class FXMLController {
     void DoAzzera(ActionEvent event) {
 
     }
+	
+    @FXML
+    void SceltaScuderia(ActionEvent event) {
+    	
+    	this.CBPilota1.setDisable(false);
+    	this.CBPilota2.setDisable(false);
+    	
+    	Scuderia s = this.ComboScuderia.getValue();
+    	Pilota p1 = null;
+    	Pilota p2 = null;
+    	
+    	int i = 0;
+    	
+    	for(Pilota p : model.getAllPiloti()) {
+    		if(p.getS().equals(s)){
+    			if(i==0) {
+    				p1 = p;
+    				i++;
+    			}else if(i==1) {
+    				p2 = p;
+    				i = 0;
+    			}
+    		}
+    	}
+    	
+       	this.CBPilota1.setValue(p1);
+    	this.CBPilota2.setValue(p2);
+    	
+    	
+    }
 
     @FXML
     void DoConfermaScelta(ActionEvent event) {
@@ -99,10 +128,12 @@ public class FXMLController {
     	Pilota nuovo2 = this.CBPilota2.getValue();
     	
     	if(nuovo1!=null) {
-    		model.Scambio(this.getP1(), nuovo1);
+    		this.setP1(nuovo1);
+    		//model.Scambio(this.getP1(), nuovo1);
     	}
     	if(nuovo2!=null) {
-    		model.Scambio(this.getP2(), nuovo2);
+    		this.setP2(nuovo2);
+    		//model.Scambio(this.getP2(), nuovo2);
     	}
     	
     	if(nuovo1.equals(nuovo2)) {
@@ -112,6 +143,7 @@ public class FXMLController {
     	
     	//quando disablo impostare che si veda meglio
     	
+    	this.ComboScuderia.setDisable(true);
     	this.CBPilota1.setDisable(true);
     	this.CBPilota2.setDisable(true);
     	this.CheckPiloti.setDisable(true);
@@ -144,7 +176,12 @@ public class FXMLController {
     			this.Segnalazione.appendText("Inserire importi la cui somma sia minore o uguale al limite imposto dal Budget Cup pari a 140 Milioni.");
     			return;
     		}else {
-    			//fai investimento
+    			this.investimenti = new ArrayList<>();
+    			investimenti.add(Aero);
+    			investimenti.add(Telaio);
+    			investimenti.add(Pit);
+    			investimenti.add(Motore);
+    			investimenti.add(Aff);
     		}
     		
     		
@@ -190,15 +227,22 @@ public class FXMLController {
 
     @FXML
     void DoSimula(ActionEvent event) {
-
+    	//controlli
+    	if(this.ComboScuderia.getValue()!=null && this.investimenti.size()==5) {
+    		model.simula(this.ComboScuderia.getValue(), investimenti.get(0), investimenti.get(1), investimenti.get(2), investimenti.get(3), investimenti.get(4), investimenti.get(5), p1, p2);
+    	}
+    	
+    	//azzerare tutti i campi
+    	
     }
     
     void setCombos() {
+    	this.ComboScuderia.getItems().addAll(model.getAllScuderie());
     	LinkedList<Pilota> piloti = new LinkedList<>(model.getAllPiloti());
     	Collections.sort(piloti);
     	this.CBPilota1.getItems().addAll(piloti);
     	this.CBPilota2.getItems().addAll(piloti);
-    	this.ComboScuderia.getItems().addAll(model.getAllScuderie());
+    	
     	
     }
 
@@ -217,7 +261,12 @@ public class FXMLController {
         assert text3 != null : "fx:id=\"text3\" was not injected: check your FXML file 'Scene.fxml'.";
         assert text4 != null : "fx:id=\"text4\" was not injected: check your FXML file 'Scene.fxml'.";
         assert text5 != null : "fx:id=\"text5\" was not injected: check your FXML file 'Scene.fxml'.";
-        assert text6 != null : "fx:id=\"text6\" was not injected: check your FXML file 'Scene.fxml'.";
+        text1.setText("0");
+        text2.setText("0");
+        text3.setText("0");
+        text4.setText("0");
+        text5.setText("0");
+        
     }
 
 	public void setModel(Model Model) {
