@@ -96,7 +96,7 @@ public class FXMLController {
     	
     	this.CBPilota1.setDisable(false);
     	this.CBPilota2.setDisable(false);
-    	
+
     	Scuderia s = this.ComboScuderia.getValue();
     	Pilota p1 = null;
     	Pilota p2 = null;
@@ -115,9 +115,11 @@ public class FXMLController {
     		}
     	}
     	
+    	System.out.println(p1.toString());
+    	System.out.println(p2.toString());
+    	
        	this.CBPilota1.setValue(p1);
     	this.CBPilota2.setValue(p2);
-    	
     	
     }
 
@@ -148,10 +150,6 @@ public class FXMLController {
     	this.CBPilota2.setDisable(true);
     	this.CheckPiloti.setDisable(true);
     	
-    	for(Pilota p : model.getAllPiloti()) {
-    		System.out.println(p.toString()+" "+p.getS().toString());
-    	}
-    	
     	this.Segnalazione.clear();
 
     }
@@ -159,36 +157,6 @@ public class FXMLController {
     @FXML
     void DoInvestimento(ActionEvent event) {
     	
-    	String aero = this.text1.getText();
-    	String telaio = this.text2.getText();
-    	String pit = this.text3.getText();
-    	String motore = this.text4.getText();
-    	String aff = this.text5.getText();
-    	
-    	try {
-    		int Aero = Integer.parseInt(aero);
-    		int Telaio = Integer.parseInt(telaio);
-    		int Pit = Integer.parseInt(pit);
-    		int Motore = Integer.parseInt(motore);
-    		int Aff = Integer.parseInt(aff);
-    		
-    		if((Aero+Telaio+Aff+Pit+Motore)>140) {
-    			this.Segnalazione.appendText("Inserire importi la cui somma sia minore o uguale al limite imposto dal Budget Cup pari a 140 Milioni.");
-    			return;
-    		}else {
-    			this.investimenti = new ArrayList<>();
-    			investimenti.add(Aero);
-    			investimenti.add(Telaio);
-    			investimenti.add(Pit);
-    			investimenti.add(Motore);
-    			investimenti.add(Aff);
-    		}
-    		
-    		
-    	}catch(NumberFormatException e) {
-    		e.printStackTrace();
-    		this.Segnalazione.appendText("I dati inseriti sono errati.\nInserire numeri interi.");
-    	} 
     	
     }
     
@@ -227,9 +195,50 @@ public class FXMLController {
 
     @FXML
     void DoSimula(ActionEvent event) {
+    	
+    	String aero = this.text1.getText();
+    	String telaio = this.text2.getText();
+    	String pit = this.text3.getText();
+    	String motore = this.text4.getText();
+    	String aff = this.text5.getText();
+    	
+    	try {
+    		int Aero = Integer.parseInt(aero);
+    		int Telaio = Integer.parseInt(telaio);
+    		int Pit = Integer.parseInt(pit);
+    		int Motore = Integer.parseInt(motore);
+    		int Aff = Integer.parseInt(aff);
+    		
+    		if((Aero+Telaio+Aff+Pit+Motore)>140) {
+    			this.Segnalazione.appendText("Inserire importi la cui somma sia minore o uguale al limite imposto dal Budget Cup pari a 140 Milioni.");
+    			return;
+    		}else {
+    			this.investimenti = new ArrayList<>();
+    			investimenti.add(Aero);
+    			investimenti.add(Telaio);
+    			investimenti.add(Pit);
+    			investimenti.add(Motore);
+    			investimenti.add(Aff);
+    		}
+    		
+    		
+    	}catch(NumberFormatException e) {
+    		e.printStackTrace();
+    		this.Segnalazione.appendText("I dati inseriti sono errati.\nInserire numeri interi.");
+    	} 
+    	
+    	this.setP1(this.CBPilota1.getValue());
+    	this.setP2(this.CBPilota2.getValue());
+    	
+    	if(this.getP1().equals(this.getP2())) {
+    		this.Segnalazione.setText("Inserire piloti diversi per la scuderia!\n");
+    		return;
+    	}
+    	
     	//controlli
     	if(this.ComboScuderia.getValue()!=null && this.investimenti.size()==5) {
-    		model.simula(this.ComboScuderia.getValue(), investimenti.get(0), investimenti.get(1), investimenti.get(2), investimenti.get(3), investimenti.get(4), investimenti.get(5), p1, p2);
+    		model.simula(this.ComboScuderia.getValue(), investimenti.get(0), investimenti.get(1), investimenti.get(2), investimenti.get(3), investimenti.get(4), p1, p2);
+    	
     	}
     	
     	//azzerare tutti i campi

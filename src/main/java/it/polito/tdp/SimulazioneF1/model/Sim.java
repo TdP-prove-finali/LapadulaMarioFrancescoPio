@@ -65,7 +65,6 @@ public class Sim {
 				y.run();
 				LinkedHashMap<Pilota, Integer> result = y.getResult();
 				this.loadResult(result);
-				recap.add(s);//che significa?
 				break;
 		}	
 	}

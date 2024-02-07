@@ -1,5 +1,7 @@
 package it.polito.tdp.SimulazioneF1.model;
 
+import java.util.Objects;
+
 public class Scuderia {
 	
 	int id;
@@ -17,9 +19,25 @@ public class Scuderia {
 	double chassis;
 	double aerodynamics;
 	double powertrains;
-	
-	//Driver P1;
-	//Driver P2;
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(id);
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Scuderia other = (Scuderia) obj;
+		return id == other.id;
+	}
+
+
 	double aerI;
 	double chaI;
 	double engI;

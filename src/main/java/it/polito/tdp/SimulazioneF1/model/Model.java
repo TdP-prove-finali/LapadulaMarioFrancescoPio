@@ -44,7 +44,7 @@ public class Model {
 		
 	}
 	
-	public void simula(Scuderia s, int a, int b, int c, int d, int e, int f, Pilota p1, Pilota p2) {
+	public void simula(Scuderia s, int a, int b, int c, int d, int e, Pilota p1, Pilota p2) {
 		List<Pilota> piloti = this.getAllPiloti();
 		List<Scuderia> scuderie = this.getAllScuderie();
 		
@@ -74,11 +74,19 @@ public class Model {
 			p2=P2;
 		}else {
 			this.Scambio(P1, p1);
-			this.Scambio(p2, p2);
+			this.Scambio(P2, p2);
 		}
 		
-		Investimento investimento = new Investimento(s, a, c, d, e, f);
+		for(Pilota p : piloti) {
+    		System.out.println(p.toString()+" "+p.getS().toString());
+    	}
+		
+		Investimento investimento = new Investimento(s, a, b, c, d, e);
 		Sim sim = new Sim(this, piloti, scuderie);
+		sim.init();
+		sim.run();
+		System.out.println(sim.printClassificaPiloti());
+		System.out.println(sim.printClassificaCostruttori());
 	}
 	
 

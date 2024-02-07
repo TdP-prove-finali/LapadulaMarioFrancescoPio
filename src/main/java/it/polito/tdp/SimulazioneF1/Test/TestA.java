@@ -30,7 +30,7 @@ public class TestA {
 		Scuderia ss = model.getAllScuderie().get(4);
 		Investimento i = new Investimento(ss, 0, 0, 0, 140, 0);
 		
-		Sim s = new Sim(model);
+		Sim s = new Sim(model, model.getAllPiloti(), model.getAllScuderie());
 		s.init();
 		s.run();
 		System.out.println(s.printClassificaPiloti());
