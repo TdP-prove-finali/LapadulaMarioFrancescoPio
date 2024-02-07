@@ -1,5 +1,7 @@
 package it.polito.tdp.SimulazioneF1.model;
 
+import java.util.Objects;
+
 public class Pilota implements Comparable<Pilota>{
 	
 	int ID;
@@ -99,6 +101,23 @@ public class Pilota implements Comparable<Pilota>{
 	@Override
 	public String toString() {
 		return this.getNome()+" "+this.getCognome();
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(ID);
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Pilota other = (Pilota) obj;
+		return ID == other.ID;
 	}
 
 	@Override

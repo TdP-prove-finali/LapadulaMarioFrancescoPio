@@ -20,24 +20,6 @@ public class Scuderia {
 	double aerodynamics;
 	double powertrains;
 
-	@Override
-	public int hashCode() {
-		return Objects.hash(id);
-	}
-
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		Scuderia other = (Scuderia) obj;
-		return id == other.id;
-	}
-
-
 	double aerI;
 	double chaI;
 	double engI;
@@ -169,10 +151,26 @@ public class Scuderia {
 		this.aerI += d;
 	}
 	
-	
 	@Override
 	public String toString() {
 		return this.getName();
+	}
+	
+	@Override
+	public int hashCode() {
+		return Objects.hash(id);
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Scuderia other = (Scuderia) obj;
+		return id == other.id;
 	}
 	
 	

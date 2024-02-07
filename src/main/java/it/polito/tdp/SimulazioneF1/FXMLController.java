@@ -88,8 +88,25 @@ public class FXMLController {
 
 	@FXML
     void DoAzzera(ActionEvent event) {
+		
+		this.setP1(null);
+		this.setP2(null);
+		
+		this.ComboScuderia.setDisable(false);
+		this.ComboScuderia.setValue(null);
+		this.CheckPiloti.setDisable(false);
+		this.CheckPiloti.setSelected(false);
+		this.CBPilota1.setValue(null);
+    	this.CBPilota2.setValue(null);
+		
+		this.Segnalazione.clear();
+	    text1.setText("0");
+        text2.setText("0");
+        text3.setText("0");
+        text4.setText("0");
+        text5.setText("0");
 
-    }
+}
 	
     @FXML
     void SceltaScuderia(ActionEvent event) {
@@ -115,9 +132,6 @@ public class FXMLController {
     		}
     	}
     	
-    	System.out.println(p1.toString());
-    	System.out.println(p2.toString());
-    	
        	this.CBPilota1.setValue(p1);
     	this.CBPilota2.setValue(p2);
     	
@@ -131,11 +145,9 @@ public class FXMLController {
     	
     	if(nuovo1!=null) {
     		this.setP1(nuovo1);
-    		//model.Scambio(this.getP1(), nuovo1);
     	}
     	if(nuovo2!=null) {
     		this.setP2(nuovo2);
-    		//model.Scambio(this.getP2(), nuovo2);
     	}
     	
     	if(nuovo1.equals(nuovo2)) {
@@ -153,15 +165,14 @@ public class FXMLController {
     	this.Segnalazione.clear();
 
     }
-
-    @FXML
-    void DoInvestimento(ActionEvent event) {
-    	
-    	
-    }
     
     @FXML
     void DoPiloti(ActionEvent event) {
+    	
+    	if(this.ComboScuderia.getValue()==null) {
+    		this.Segnalazione.appendText("Prima di scegliere i piloti selezionare una scuderia.");
+    		return;
+    	}
     	
     	this.ComboScuderia.setDisable(true);
     	this.CBPilota1.setDisable(false);
@@ -190,11 +201,37 @@ public class FXMLController {
     	
     	this.CBPilota1.setValue(p1);
     	this.CBPilota2.setValue(p2);
+    	
+    	this.CheckPiloti.setDisable(true);
 
     }
 
     @FXML
     void DoSimula(ActionEvent event) {
+    	
+    	Pilota nuovo1 = this.CBPilota1.getValue();
+    	Pilota nuovo2 = this.CBPilota2.getValue();
+    	
+    	if(nuovo1==null || nuovo2==null) {
+    		this.Segnalazione.appendText("Inserire i piloti che gareggeranno per la tua squadra.");
+    		return;
+    	}
+    	
+    	if(nuovo1!=null) {
+    		this.setP1(nuovo1);
+    	}
+    	
+    	if(nuovo2!=null) {
+    		this.setP2(nuovo2);
+    	}
+    	
+    	if(nuovo1.equals(nuovo2)) {
+    		this.Segnalazione.setText("Inserire piloti diversi per la scuderia!\n");
+    		return;
+    	}
+    	
+    	//se funziona posso togliere la roba dei P1 e P2
+    	//al momento funziona
     	
     	String aero = this.text1.getText();
     	String telaio = this.text2.getText();
@@ -227,21 +264,29 @@ public class FXMLController {
     		this.Segnalazione.appendText("I dati inseriti sono errati.\nInserire numeri interi.");
     	} 
     	
-    	this.setP1(this.CBPilota1.getValue());
-    	this.setP2(this.CBPilota2.getValue());
-    	
-    	if(this.getP1().equals(this.getP2())) {
-    		this.Segnalazione.setText("Inserire piloti diversi per la scuderia!\n");
-    		return;
-    	}
-    	
     	//controlli
     	if(this.ComboScuderia.getValue()!=null && this.investimenti.size()==5) {
-    		model.simula(this.ComboScuderia.getValue(), investimenti.get(0), investimenti.get(1), investimenti.get(2), investimenti.get(3), investimenti.get(4), p1, p2);
+    		model.simula(this.ComboScuderia.getValue(), investimenti.get(0), investimenti.get(1), investimenti.get(2), investimenti.get(3), investimenti.get(4), this.getP1(), this.getP2());
     	
     	}
     	
     	//azzerare tutti i campi
+		this.setP1(null);
+		this.setP2(null);
+		
+		this.ComboScuderia.setDisable(false);
+		this.ComboScuderia.setValue(null);
+		this.CheckPiloti.setDisable(false);
+		this.CheckPiloti.setSelected(false);
+		this.CBPilota1.setValue(null);
+    	this.CBPilota2.setValue(null);
+		
+		this.Segnalazione.clear();
+	    text1.setText("0");
+        text2.setText("0");
+        text3.setText("0");
+        text4.setText("0");
+        text5.setText("0");
     	
     }
     
@@ -252,7 +297,6 @@ public class FXMLController {
     	this.CBPilota1.getItems().addAll(piloti);
     	this.CBPilota2.getItems().addAll(piloti);
     	
-    	
     }
 
     @FXML
@@ -261,7 +305,6 @@ public class FXMLController {
         assert BtnConfermaScelta != null : "fx:id=\"BtnConfermaScelta\" was not injected: check your FXML file 'Scene.fxml'.";
         assert CBPilota1 != null : "fx:id=\"CBPilota1\" was not injected: check your FXML file 'Scene.fxml'.";
         assert CBPilota2 != null : "fx:id=\"CBPilota2\" was not injected: check your FXML file 'Scene.fxml'.";
-        assert CheckInvestimento != null : "fx:id=\"CheckInvestimento\" was not injected: check your FXML file 'Scene.fxml'.";
         assert CheckPiloti != null : "fx:id=\"CheckPiloti\" was not injected: check your FXML file 'Scene.fxml'.";
         assert ComboScuderia != null : "fx:id=\"ComboScuderia\" was not injected: check your FXML file 'Scene.fxml'.";
         assert Simula != null : "fx:id=\"Simula\" was not injected: check your FXML file 'Scene.fxml'.";

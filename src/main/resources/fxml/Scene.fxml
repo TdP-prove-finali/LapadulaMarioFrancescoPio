@@ -87,43 +87,26 @@
             </VBox>
             <VBox prefHeight="400.0" prefWidth="325.0">
                <children>
-                  <HBox prefHeight="100.0" prefWidth="200.0">
-                     <children>
-                        <Label prefHeight="34.0" prefWidth="292.0" text="Clicca per investire sullo sviluppo della scuderia">
-                           <HBox.margin>
-                              <Insets left="5.0" right="10.0" top="13.0" />
-                           </HBox.margin>
-                           <font>
-                              <Font name="System Bold Italic" size="13.0" />
-                           </font>
-                        </Label>
-                        <CheckBox fx:id="CheckInvestimento" alignment="CENTER" mnemonicParsing="false" onAction="#DoInvestimento" prefHeight="30.0" prefWidth="17.0">
-                           <HBox.margin>
-                              <Insets top="14.0" />
-                           </HBox.margin>
-                        </CheckBox>
-                     </children>
-                  </HBox>
                   <HBox prefHeight="30.0" prefWidth="300.0">
                      <children>
                         <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Inserire gli importi da investire in ogni reparto." textAlignment="CENTER" wrappingWidth="314.413330078125">
                            <HBox.margin>
-                              <Insets left="5.0" right="5.0" />
+                              <Insets left="5.0" right="5.0" top="10.0" />
                            </HBox.margin>
                            <font>
-                              <Font size="13.0" />
+                              <Font size="15.0" />
                            </font>
                         </Text>
                      </children>
                   </HBox>
                   <HBox prefHeight="30.0" prefWidth="300.0">
                      <children>
-                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="La somma degli importi non può superare i 140 M $." textAlignment="CENTER" wrappingWidth="315.4046630859375">
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="La somma degli importi non può superare i 140 M $." textAlignment="CENTER" wrappingWidth="280.0">
                            <HBox.margin>
-                              <Insets bottom="5.0" left="5.0" right="5.0" />
+                              <Insets bottom="5.0" left="20.0" right="5.0" top="8.0" />
                            </HBox.margin>
                            <font>
-                              <Font size="13.0" />
+                              <Font size="15.0" />
                            </font>
                         </Text>
                      </children>
@@ -258,12 +241,12 @@
          <children>
             <HBox prefHeight="91.0" prefWidth="674.0">
                <children>
-                  <Button fx:id="Azzera" mnemonicParsing="false" onAction="#DoAzzera" prefHeight="26.0" prefWidth="76.0" text="Azzera">
+                  <Button fx:id="Azzera" mnemonicParsing="false" onAction="#DoAzzera" prefHeight="30.0" prefWidth="80.0" text="Azzera">
                      <HBox.margin>
-                        <Insets left="175.0" right="150.0" top="30.0" />
+                        <Insets left="171.0" right="150.0" top="30.0" />
                      </HBox.margin>
                   </Button>
-                  <Button fx:id="Simula" mnemonicParsing="false" onAction="#DoSimula" prefHeight="26.0" prefWidth="76.0" text="Simula">
+                  <Button fx:id="Simula" mnemonicParsing="false" onAction="#DoSimula" prefHeight="30.0" prefWidth="80.0" text="Simula">
                      <HBox.margin>
                         <Insets top="30.0" />
                      </HBox.margin>

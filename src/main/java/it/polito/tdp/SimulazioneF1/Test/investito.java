@@ -13,8 +13,8 @@ public class investito {
 		
 		Model model = new Model();
 		
-		Scuderia s = model.getAllScuderie().get(4);
-		Investimento i = new Investimento(s, 40, 40, 0, 40, 0);
+		Scuderia s = model.getAllScuderie().get(7);
+		Investimento i = new Investimento(s, 46, 46, 0, 46, 0);
 		
 		System.out.println();
 		

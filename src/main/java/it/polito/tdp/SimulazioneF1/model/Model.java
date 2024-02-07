@@ -66,7 +66,15 @@ public class Model {
     				P2 = p;
     				i = 0;
     			}
+    			
     		}
+    			
+			if(p.equals(p1)) {
+				p1 = p;
+			}else if(p.equals(p2)) {
+				p2 = p;
+			}
+    		
     	}
 		
 		if(p1==null && p2==null) {
@@ -81,12 +89,25 @@ public class Model {
     		System.out.println(p.toString()+" "+p.getS().toString());
     	}
 		
-		Investimento investimento = new Investimento(s, a, b, c, d, e);
+		Investimento investimento = new Investimento(s, a, b, c, d, e, this.findMaxOverall(scuderie));
 		Sim sim = new Sim(this, piloti, scuderie);
 		sim.init();
 		sim.run();
 		System.out.println(sim.printClassificaPiloti());
 		System.out.println(sim.printClassificaCostruttori());
+	}
+	
+	private double findMaxOverall(List<Scuderia> scuderie) {
+		
+		double max = 0.0;
+		
+		for(Scuderia s : scuderie) {
+			if (s.getTotOVR()>max) {
+				max = s.getTotOVR();
+			}
+		}
+		
+		return max;
 	}
 	
 
