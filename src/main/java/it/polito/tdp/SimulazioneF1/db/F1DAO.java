@@ -11,8 +11,36 @@ import it.polito.tdp.SimulazioneF1.model.*;
 
 public class F1DAO {
 	
+	public F1DAO() {
+		scuderie = new LinkedList<>(this.getAllScuderia().values());
+		piloti = new LinkedList<>(this.getAllPiloti().values());
+		//circuiti = new LinkedList<>(this.getAllTracks().values());
+		//this.getIndiciSorpasso();
+	}
+	
+	
+	
+	public LinkedList<Pilota> getPiloti() {
+		return piloti;
+	}
+
+	public LinkedList<Scuderia> getScuderie() {
+		return scuderie;
+	}
+
+	public LinkedList<Track> getCircuiti() {
+		return circuiti;
+	}
+
+
+
 	TreeMap<Integer, Scuderia> IdMapScuderie;
 	TreeMap<Integer, Track> IdMapTracks;
+	
+	LinkedList<Pilota> piloti;
+	LinkedList<Scuderia> scuderie;
+	LinkedList<Track> circuiti;
+	
 	
 	public HashMap<Integer, Scuderia> getAllScuderia(){
 		

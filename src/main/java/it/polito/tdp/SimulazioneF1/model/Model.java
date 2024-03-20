@@ -5,25 +5,21 @@ import it.polito.tdp.SimulazioneF1.db.F1DAO;
 public class Model {
 	
 	F1DAO dao;
-	//private HashMap<Integer, Scuderia> scuderie;
-	//private HashMap<Integer, Pilota> piloti;
 	private HashMap<Integer, Track> circuiti;
 	
 	public Model() {
 		dao = new F1DAO(); 
-		//scuderie = new HashMap<Integer, Scuderia>(dao.getAllScuderia());
-		//piloti = new HashMap<Integer, Pilota>(dao.getAllPiloti());
 		circuiti = new HashMap<Integer, Track>(dao.getAllTracks());
 		dao.getIndiciSorpasso();
 	}
 	
 	//ogni volta che richiamo lista piloti e scuderia la vado a riprendere dal dao
 	public List<Scuderia> getAllScuderie(){
-		return new ArrayList<Scuderia>(dao.getAllScuderia().values());
+		return new ArrayList<Scuderia>(dao.getScuderie());
 	}
 	
 	public List<Pilota> getAllPiloti(){
-		return new ArrayList<Pilota>(dao.getAllPiloti().values());
+		return new ArrayList<Pilota>(dao.getPiloti());
 	}
 	
 	public List<Track> getAllTracks(){
@@ -76,6 +72,12 @@ public class Model {
 			}
     		
     	}
+    	
+    	for(Scuderia ss : scuderie) {
+    		if(s.equals(ss)) {
+    			s = ss;
+    		}
+    	}
 		
 		if(p1==null && p2==null) {
 			p1=P1;
@@ -93,6 +95,11 @@ public class Model {
 		Sim sim = new Sim(this, piloti, scuderie);
 		sim.init();
 		sim.run();
+		
+		for(Scuderia t : scuderie) {
+			System.out.println(t.toString()+" "+t.getTotOVR());
+		}
+		
 		System.out.println(sim.printClassificaPiloti());
 		System.out.println(sim.printClassificaCostruttori());
 	}

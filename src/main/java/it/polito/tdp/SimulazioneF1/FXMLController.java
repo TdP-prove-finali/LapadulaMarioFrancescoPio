@@ -246,8 +246,12 @@ public class FXMLController {
     		int Motore = Integer.parseInt(motore);
     		int Aff = Integer.parseInt(aff);
     		
+    		if(!(Aero>=0 && Telaio>=0 && Pit>=0 && Motore>=0 && Aff>=0)) {
+    			this.Segnalazione.appendText("Inserire valori interi positivi per gli investimenti.\n");
+    			return;
+    		}
     		if((Aero+Telaio+Aff+Pit+Motore)>140) {
-    			this.Segnalazione.appendText("Inserire importi la cui somma sia minore o uguale al limite imposto dal Budget Cup pari a 140 Milioni.");
+    			this.Segnalazione.appendText("Inserire importi la cui somma sia minore o uguale al limite imposto dal Budget Cup pari a 140 Milioni.\n");
     			return;
     		}else {
     			this.investimenti = new ArrayList<>();
@@ -262,6 +266,7 @@ public class FXMLController {
     	}catch(NumberFormatException e) {
     		e.printStackTrace();
     		this.Segnalazione.appendText("I dati inseriti sono errati.\nInserire numeri interi.");
+    		return;
     	} 
     	
     	//controlli
