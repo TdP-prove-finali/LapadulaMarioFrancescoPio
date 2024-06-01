@@ -87,23 +87,50 @@ public class Model {
 			this.Scambio(P2, p2);
 		}
 		
-		for(Pilota p : piloti) {
-    		System.out.println(p.toString()+" "+p.getS().toString());
-    	}
+		Investimento investimento = new Investimento(s, a, b, c, d, e, this.findMaxOverall(scuderie), this.findMaxDur(scuderie));
 		
-		Investimento investimento = new Investimento(s, a, b, c, d, e, this.findMaxOverall(scuderie));
 		Sim sim = new Sim(this, piloti, scuderie);
 		sim.init();
 		sim.run();
 		
-		for(Scuderia t : scuderie) {
-			System.out.println(t.toString()+" "+t.getTotOVR());
-		}
 		
-		System.out.println(sim.printClassificaPiloti());
+		
+		//System.out.println(sim.printClassificaPiloti());
 		System.out.println(sim.printClassificaCostruttori());
+		System.out.println(sim.Stats());
+		
+		this.reload();
+		
 	}
 	
+	private double findMaxpit(List<Scuderia> scuderie) {
+		double max = 0.0;
+		
+		for(Scuderia s : scuderie) {
+			if (s.getDurability()>max) {
+				max = s.getDurability();
+			}
+		}
+		
+		return max;
+	}
+	
+	private double findMaxDur(List<Scuderia> scuderie) {
+		double max = 0.0;
+		
+		for(Scuderia s : scuderie) {
+			if (s.getDurability()>max) {
+				max = s.getDurability();
+			}
+		}
+		
+		return max;
+	}
+	
+	private void reload() {
+		dao.reload();
+	}	
+		
 	private double findMaxOverall(List<Scuderia> scuderie) {
 		
 		double max = 0.0;

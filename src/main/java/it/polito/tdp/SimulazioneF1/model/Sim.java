@@ -14,8 +14,10 @@ public class Sim {
 	ArrayList<Pilota> piloti;
 	ArrayList<Scuderia> scuderie;
 	
-	List<Sessione> recap; //qui inserisco tutte le sessioni così da poterle stampare all'occorrenza
-	//mi sa che non è il top
+	int Ritiri = 0;
+	int Sorpassi = 0;
+	int Guasti = 0;
+	int Incidenti = 0;
 	
 	public Sim(Model model, List<Pilota> piloti, List<Scuderia> scuderie) {
 		super();
@@ -27,9 +29,21 @@ public class Sim {
 		this.classificaPiloti = new HashMap<>();
 		this.classificaCostruttori = new HashMap<Scuderia, Integer>();
 		queue = new PriorityQueue<>();
-		//recap = new ArrayList<>();
+		
+		//System.out.println("CREAZIONE SIM");
+		
+		for(Scuderia t : scuderie) {
+			//System.out.println(t.toString()+" "+t.getTotOVR());
+			if(t.getTag().equals("RBR")) {
+				System.out.println("RBR");
+				System.out.println(t.getDurability());
+				System.out.println();
+			}
+		}
+		
+		
 	}
-
+	
 	public void init() {
 		for(Track t : model.getAllTracks()) {
 			queue.add(new Sessione(t, evento.QUALIFICA));
@@ -65,11 +79,14 @@ public class Sim {
 				y.run();
 				LinkedHashMap<Pilota, Integer> result = y.getResult();
 				this.loadResult(result);
+				this.Ritiri+=y.getRitiro();
+				this.Incidenti+=y.getIncidenti();
+				this.Guasti+=y.getGuasti();
+				this.Sorpassi+=y.getSorpassi();
 				break;
 		}	
 	}
 	
-	//ATTENTO AGLI INDICI DI RISULTATI FINALI
 	public void loadResult(LinkedHashMap<Pilota, Integer> result) {
 		
 		for(Pilota p : this.classificaPiloti.keySet()) {
@@ -154,6 +171,10 @@ public class Sim {
 		
 		return s;
 		
+	}
+	
+	public String Stats() {
+		return "Guasti: "+this.Guasti+" Incidenti: "+this.Incidenti+" Sorpassi: "+this.Sorpassi+" Totale: "+this.Ritiri;
 	}
 	
 	private Map<Pilota, Integer> riordina(Map<Pilota, Integer> mappa) {

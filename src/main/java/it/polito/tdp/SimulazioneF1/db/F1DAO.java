@@ -18,7 +18,11 @@ public class F1DAO {
 		//this.getIndiciSorpasso();
 	}
 	
-	
+	public void reload() {
+		scuderie = new LinkedList<>(this.getAllScuderia().values());
+		piloti = new LinkedList<>(this.getAllPiloti().values());
+		
+	}
 	
 	public LinkedList<Pilota> getPiloti() {
 		return piloti;

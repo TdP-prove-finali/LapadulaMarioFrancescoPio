@@ -279,8 +279,11 @@ public class FXMLController {
 		this.setP1(null);
 		this.setP2(null);
 		
+		this.CBPilota1.getItems().clear();
+		this.CBPilota2.getItems().clear();
 		this.ComboScuderia.setDisable(false);
 		this.ComboScuderia.setValue(null);
+		this.ComboScuderia.getItems().clear();
 		this.CheckPiloti.setDisable(false);
 		this.CheckPiloti.setSelected(false);
 		this.CBPilota1.setValue(null);
@@ -292,6 +295,7 @@ public class FXMLController {
         text3.setText("0");
         text4.setText("0");
         text5.setText("0");
+        this.setCombos();
     	
     }
     

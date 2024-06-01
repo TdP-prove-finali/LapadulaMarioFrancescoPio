@@ -47,17 +47,30 @@ public class SimR {
 	}
 	
 	
-	//variabili provvisorie
+	int ritiro = 0;
+	int guasti = 0;
+	int incidenti = 0;
+	int sorpassi = 0;
 	
-	int contSorpassiPos = 0;
-	int contSorpassiOK = 0;
-	int contSorpassiNO = 0;
-	int contNO = 0;
-	
+	public int getRitiro() {
+		return ritiro;
+	}
+
+	public int getGuasti() {
+		return guasti;
+	}
+
+	public int getIncidenti() {
+		return incidenti;
+	}
+
+	public int getSorpassi() {
+		return sorpassi;
+	}
+
 	public void run() {
 		
-		System.out.println(t.getNome()+"    "+t.getOverI());
-		System.out.println("PIOGGIA: "+this.pioggia);
+		//System.out.println(t.getNome()+"    "+t.getOverI());
 		
 		this.partenza();
 		
@@ -78,15 +91,11 @@ public class SimR {
 			}
 			
 			if(i==t.getNGiri()) {
-			System.out.println("\nLAP "+i);
-			this.printMap(gara);}
+			//this.printMap(gara);
+			}
 			
 		}
-		
-		
-		//System.out.println("Numero sorpassi possibili: "+contSorpassiPos+"\nNumero sorpassi riusciti: "+contSorpassiOK+"\nNumero sorpassi non riusciti: "+(contSorpassiPos-contNO-contSorpassiOK)+"\nNumero sorpassi non tentati: "+contNO);
-		//double perc = (1-((double)(contNO))/(double)(contSorpassiPos));
-		//System.out.println(perc);
+
 	}
 	
 	private void checksorpassi() {
@@ -100,17 +109,12 @@ public class SimR {
 			if(this.gara.get(pd)!=Double.MAX_VALUE && pilotaavanti!=Double.MAX_VALUE) {
 				
 				if((gara.get(pd)-pilotaavanti)<=1.0) {
-				
-					contSorpassiPos++;
+
 					
-					//System.out.println(YELLOW+pd.getCognome()+" PROVA IL SORPASSO SU "+pa.getCognome()+RESET);
 					if(this.ActionSorpasso(pd, pa)) {
-						
-						contSorpassiOK++;
+
 						
 						//se il sorpasso viene completato assegno al pilota dietro il tempo di gara del pilota davanti e li distanzio di 1.1 secondi
-						//this.gara.put(p, this.gara.put(pa, this.gara.get(p)));
-						//this.gara.put(p, this.gara.get(p)+1.1);
 						
 						this.gara.put(pd, this.gara.get(pa));
 						this.gara.put(pa, this.gara.get(pd)+1.0);
@@ -118,10 +122,8 @@ public class SimR {
 						//pa resta pa
 						pilotaavanti = this.gara.get(pa); 
 						
-						//System.out.println(BLUE+"SOPRASSO RIUSCITO!"+RESET);
 					}else {
 						
-						//System.out.println(PURPLE+"SOPRASSO NON RIUSCITO!"+RESET);
 						if(this.gara.get(pd)!=Double.MAX_VALUE) {
 							
 							//problema
@@ -146,7 +148,6 @@ public class SimR {
 		}
 		
 	}
-
 	
 	//P1 è il pilota che tenta il sorpasso su P2
 	private boolean ActionSorpasso(Pilota p1, Pilota p2) {
@@ -160,11 +161,17 @@ public class SimR {
 				
 				if(a1) {
 					
+					if(p1.getS().getTag().equals("RBR")) {
+						this.sorpassi++;
+					}
 					this.incidente(p1);
 					
 				}
 				if(a2) {
 					
+					if(p2.getS().getTag().equals("RBR")) {
+						this.sorpassi++;
+					}
 					this.incidente(p2);
 				
 				}
@@ -191,17 +198,11 @@ public class SimR {
 				
 				double a = (d1*0.44+d2*0.41+d3*0.15+dd);
 				
-				//System.out.println(CYAN+p1.getCognome()+"   "+p2.getCognome()+": "+a+RESET);
-				
 				return a>0;
 				
 			}
 		
-		}else {
-			
-			
-			contNO++;
-			
+		}else {			
 			
 			return false;
 			
@@ -224,7 +225,6 @@ public class SimR {
         double pp3 = Math.max(-0.1, pp2);
         
         double index = overtake+pp3;
-		//System.out.println(CYAN+"TRY :"+index+"   "+p1.getCognome()+RESET);
 		
 		return Math.random()<index;
 		
@@ -237,10 +237,10 @@ public class SimR {
 		return (Math.random()<index);
 		
 	}
-
 	private boolean Guasto(Pilota p) {
 		
-		double index = p.getS().getDurability()/225.0;
+		
+		double index = Math.pow(p.getS().getDurability(), -1)/1184.8;
 		
 		return (Math.random()<index);
 		
@@ -280,9 +280,10 @@ public class SimR {
 		
 		
 		for(Pilota p : grid) {
+			
 			double d1 = t.CalcolaPrestazioneScuderia(p.getS());
         	double d2 = p.getOvr()/100.0;
-        	double d4 = t.getTryeI()/1000.0*(p.getControl()*0.003+p.getSmoothness()*0.007); //calcolo prestazione pilota relativo acircuito (stress della gomma)
+        	double d4 = t.getTryeI()/1000.0*(p.getControl()*0.003+p.getSmoothness()*0.007); //calcolo prestazione pilota relativo a circuito (stress della gomma)
         	double d3;
         	
         	if(pioggia) {
@@ -321,19 +322,32 @@ public class SimR {
 		double tempo = t.getTempoMedioGiro();
 		
 		for(Pilota p : this.PrestazionePiloti.keySet()){
+			
+			if(this.gara.get(p)!=Double.MAX_VALUE) {
 
-			if(this.Guasto(p) || this.IncidentePilotaGiro(p)) {
+				if(this.Guasto(p)){
+					if(p.getS().getTag().equals("RBR")) {
+						this.guasti++;
+					}
+					this.incidente(p);
 				
-				this.incidente(p);
+				}else if(this.IncidentePilotaGiro(p)) {
+					
+					if(p.getS().getTag().equals("RBR")) {
+						this.incidenti++;
+					}
+					this.incidente(p);
+					
+				}else {
+					
+		        NormalDistribution distribuzioneNormale = new NormalDistribution(tempo*this.PrestazionePiloti.get(p), 0.16);
+				double x = distribuzioneNormale.sample();			
 				
-			}else {
+				double newrecord = this.gara.get(p) + x;
+				this.gara.put(p, newrecord);
 				
-	        NormalDistribution distribuzioneNormale = new NormalDistribution(tempo*this.PrestazionePiloti.get(p), 0.16);
-			double x = distribuzioneNormale.sample();			
-			
-			double newrecord = this.gara.get(p) + x;
-			this.gara.put(p, newrecord);
-			
+				}
+				
 			}
 			
 		}
@@ -344,11 +358,7 @@ public class SimR {
 	public Map<Pilota, Double> riordina(Map<Pilota, Double> mappa) {
 		
 		ArrayList<Entry<Pilota,Double>> lista = new ArrayList<>(mappa.entrySet());
-		
-		// Ordina la lista in base ai valori delle chiavi (in ordine decrescente)
 	    Collections.sort(lista, new CamparatorTime());
-
-	    // Ricostruisci la mappa ordinata
 	    LinkedHashMap<Pilota, Double> mappaordinata = new LinkedHashMap<>();
 	    
 	    for (Map.Entry<Pilota, Double> entry : lista) {
@@ -358,14 +368,16 @@ public class SimR {
 	    return mappaordinata;
 	    
 	}
-
 	
 	private void incidente(Pilota p) {
 		
 		if(this.gara.get(p)!=Double.MAX_VALUE) {
+			
+		if(p.getS().getTag().equals("RBR")) {
+			this.ritiro++;
+		}
 		
 		this.gara.put(p, Double.MAX_VALUE);
-		System.out.println(RED+"INCIDENTE DI "+p.getCognome()+RESET);
 		
 		}
 		
