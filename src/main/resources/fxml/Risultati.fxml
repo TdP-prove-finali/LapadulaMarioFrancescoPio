@@ -4,58 +4,14 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
-   <center>
-      <HBox BorderPane.alignment="CENTER">
-         <children>
-            <TableView fx:id="Tab1" prefHeight="200.0" prefWidth="230.0">
-              <columns>
-                <TableColumn fx:id="Nome" prefWidth="100.0" text="Nome" />
-                <TableColumn fx:id="Punti" prefWidth="72.0" text="Punti" />
-                  <TableColumn fx:id="W" prefWidth="52.0" text="Vittorie" />
-              </columns>
-               <opaqueInsets>
-                  <Insets />
-               </opaqueInsets>
-               <padding>
-                  <Insets bottom="3.0" left="3.0" right="3.0" top="3.0" />
-               </padding>
-            </TableView>
-            <TableView fx:id="Tab2" prefHeight="200.0" prefWidth="230.0">
-              <columns>
-                <TableColumn fx:id="Nome" prefWidth="100.0" text="Nome" />
-                <TableColumn fx:id="Punti" prefWidth="72.0" text="Punti" />
-                  <TableColumn fx:id="W" prefWidth="52.0" text="Vittorie" />
-              </columns>
-               <padding>
-                  <Insets bottom="3.0" left="3.0" right="3.0" top="3.0" />
-               </padding>
-            </TableView>
-            <TableView fx:id="Tab3" prefHeight="200.0" prefWidth="230.0">
-              <columns>
-                <TableColumn fx:id="Nome" prefWidth="100.0" text="Nome" />
-                <TableColumn fx:id="Punti" prefWidth="72.0" text="Punti" />
-                  <TableColumn fx:id="W" prefWidth="52.0" text="Vittorie" />
-              </columns>
-               <padding>
-                  <Insets bottom="3.0" left="3.0" right="3.0" top="3.0" />
-               </padding>
-            </TableView>
-         </children>
-         <opaqueInsets>
-            <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-         </opaqueInsets>
-         <padding>
-            <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-         </padding>
-      </HBox>
-   </center>
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polito.tdp.SimulazioneF1.RisultatiController">
    <bottom>
       <HBox prefHeight="62.0" prefWidth="666.0" BorderPane.alignment="CENTER">
          <children>
@@ -90,4 +46,44 @@
          </children>
       </VBox>
    </top>
+   <center>
+      <VBox prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
+         <children>
+            <VBox prefHeight="200.0" prefWidth="100.0">
+               <children>
+                  <HBox prefHeight="30.0" prefWidth="700.0">
+                     <children>
+                        <TextField editable="false" prefHeight="30.0" prefWidth="283.0" text="INVESTIMENTI">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                        </TextField>
+                        <TextField editable="false" prefHeight="30.0" prefWidth="240.0" text="PUNTI PILOTI">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                        </TextField>
+                        <TextField editable="false" prefHeight="26.0" prefWidth="184.0" text="PUNTI SCUDERIA">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                        </TextField>
+                     </children>
+                  </HBox>
+                  <TableView fx:id="tableview" prefHeight="500.0" prefWidth="700.0">
+                    <columns>
+                      <TableColumn fx:id="Aero" editable="false" prefWidth="70.0" text="Aero" />
+                      <TableColumn fx:id="Telaio" editable="false" prefWidth="70.0" text="Telaio" />
+                        <TableColumn fx:id="Motore" editable="false" prefWidth="70.0" text="Motore" />
+                        <TableColumn fx:id="Affid" editable="false" prefWidth="70.0" text="Affidabilità" />
+                        <TableColumn fx:id="P1" prefWidth="118.0" text="Pilota 1" />
+                        <TableColumn fx:id="P2" prefWidth="118.0" text="Pilota 2" />
+                        <TableColumn fx:id="Scuderia" prefWidth="180.00006103515625" text="Scuderia" />
+                    </columns>
+                  </TableView>
+               </children>
+            </VBox>
+         </children>
+      </VBox>
+   </center>
 </BorderPane>

@@ -7,6 +7,11 @@ public class Model {
 	F1DAO dao;
 	private HashMap<Integer, Track> circuiti;
 	
+	int aero;
+	int telaio;
+	int motore;
+	int affid;
+	
 	public Model() {
 		dao = new F1DAO(); 
 		circuiti = new HashMap<Integer, Track>(dao.getAllTracks());
@@ -40,9 +45,13 @@ public class Model {
 		
 	}
 	
-	public void simula(Scuderia s, int a, int b, int c, int d, int e, Pilota p1, Pilota p2) {
+	public void simula(Scuderia s, int a, int b, int c, int d, Pilota p1, Pilota p2) {
 		List<Pilota> piloti = this.getAllPiloti();
 		List<Scuderia> scuderie = this.getAllScuderie();
+		this.aero = a;
+		this.telaio = b;
+		this.motore = c;
+		this.affid = d;
 		
 		//forse inutile questa roba dei piloti perchè la faccio già nel controller
 		//da verificare
@@ -87,7 +96,7 @@ public class Model {
 			this.Scambio(P2, p2);
 		}
 		
-		Investimento investimento = new Investimento(s, a, b, c, d, e, this.findMaxOverall(scuderie), this.findMaxDur(scuderie));
+		Investimento investimento = new Investimento(s, a, b, c, d, this.findMaxOverall(scuderie), this.findMaxDur(scuderie));
 		
 		Sim sim = new Sim(this, piloti, scuderie);
 		sim.init();
@@ -99,10 +108,48 @@ public class Model {
 		System.out.println(sim.printClassificaCostruttori());
 		System.out.println(sim.Stats());
 		
+		sim.loadP(s);
+		pilota1 = sim.gets1();
+		pilota2 = sim.gets2();
+		sim.loadSc(s);
+		Sc = sim.getScud();
+		
 		this.reload();
 		
 	}
 	
+	String pilota1;
+	String pilota2;
+	String Sc;
+	
+	public int getAero() {
+		return aero;
+	}
+
+	public int getTelaio() {
+		return telaio;
+	}
+
+	public int getMotore() {
+		return motore;
+	}
+
+	public int getAffid() {
+		return affid;
+	}
+
+	public String getPilota1() {
+		return pilota1;
+	}
+
+	public String getPilota2() {
+		return pilota2;
+	}
+
+	public String getSc() {
+		return Sc;
+	}
+
 	private double findMaxpit(List<Scuderia> scuderie) {
 		double max = 0.0;
 		

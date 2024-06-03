@@ -19,6 +19,7 @@ public class EntryPoint extends Application {
 		Model model = new Model();
 		controller.setModel(model);
 		controller.setCombos();
+		controller.setStage(stage);
 		
 		Scene scene = new Scene(root);
 		//scene.getStylesheets().add(getClass().getResource("/styles/Styles.css").toExternalForm());

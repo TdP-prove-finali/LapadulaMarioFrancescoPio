@@ -6,7 +6,7 @@ import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 
-public class CambiaScena {
+class CambiaScena {
 	
 	protected static void goToRisultati(Stage stage, Model model) throws Exception {
 		FXMLLoader loader = new FXMLLoader(CambiaScena.class.getResource("/fxml/Risultati.fxml"));
@@ -16,23 +16,23 @@ public class CambiaScena {
 		controller.setModel(model);
 		controller.setStage(stage);
 		Scene scene = new Scene(root);
-        scene.getStylesheets().add("/styles/Styles.css");
-        stage.setTitle("F1");
+        //scene.getStylesheets().add("/styles/Styles.css");
+        //stage.setTitle("F1");
         stage.setScene(scene);
         stage.show();
+        controller.add();
 	}
 	
 	protected static void goToSimulazione(Stage stage) throws Exception {
 		FXMLLoader loader = new FXMLLoader(CambiaScena.class.getResource("/fxml/Scene.fxml"));
         BorderPane root = loader.load();
-        //cambianome al controller
         FXMLController controller = loader.getController();
 		Model model = new Model();
 		controller.setModel(model);
 		controller.setStage(stage);
 		Scene scene = new Scene(root);
-        scene.getStylesheets().add("/styles/Styles.css");
-        stage.setTitle("F1");
+        //scene.getStylesheets().add("/styles/Styles.css");
+        //stage.setTitle("F1");
         stage.setScene(scene);
         stage.show();
 	}

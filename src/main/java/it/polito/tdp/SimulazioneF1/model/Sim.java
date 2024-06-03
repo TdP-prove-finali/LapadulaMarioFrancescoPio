@@ -64,6 +64,7 @@ public class Sim {
 		while(!queue.isEmpty()) {
 			process(queue.poll());
 		}
+		this.riordinaclassifiche();
 	}
 	
 	List<Pilota> grid;
@@ -135,6 +136,11 @@ public class Sim {
 				break;
 			}
 		}
+	}
+	
+	public void riordinaclassifiche()	{
+		this.classificaPiloti = new LinkedHashMap<>(this.riordina(classificaPiloti));
+		this.classificaCostruttori = new LinkedHashMap<>(this.riordinaa(classificaCostruttori)); 
 	}
 	
 	public String printClassificaPiloti() {
@@ -212,5 +218,54 @@ public class Sim {
 	    return mappaordinata;
 	    
 	}
+
+	String s1;
+	String s2;
+	String scud;
+	
+	public void loadP(Scuderia s) {
+		String stringa1 = "";
+		String stringa2 = "";
+		int i = 1;
+		boolean flag = false;
+		for (Pilota p : this.classificaPiloti.keySet()) {
+			if(p.getS().equals(s) && flag==false) {
+				stringa1 += i + ".  " + p.getCognome().substring(0, 3).toUpperCase() + "   " + this.classificaPiloti.get(p);
+				flag = true;
+			}else if(p.getS().equals(s) && flag) {
+				stringa2 += i + ".  " + p.getCognome().substring(0, 3).toUpperCase() + "   " + this.classificaPiloti.get(p);
+			}
+			i++;
+		}
+		
+		s1 = stringa1;
+		s2 = stringa2;
+	}
+	
+	public void loadSc(Scuderia s) {
+		int i = 1;
+		for(Scuderia sc : this.classificaCostruttori.keySet()) {
+			if(sc.equals(s)) {
+				scud = i + ".  " + s.getTag() + "   " + this.classificaCostruttori.get(sc);
+			}
+			i++;
+		}
+	}
+
+	public String gets1() {
+		return s1;
+	}
+
+	public String gets2() {
+		return s2;
+	}
+
+	public String getScud() {
+		return scud;
+	}
+	
+	
+	
+
 	
 }
