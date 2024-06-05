@@ -102,12 +102,6 @@ public class Model {
 		sim.init();
 		sim.run();
 		
-		
-		
-		//System.out.println(sim.printClassificaPiloti());
-		System.out.println(sim.printClassificaCostruttori());
-		System.out.println(sim.Stats());
-		
 		sim.loadP(s);
 		pilota1 = sim.gets1();
 		pilota2 = sim.gets2();
@@ -148,18 +142,6 @@ public class Model {
 
 	public String getSc() {
 		return Sc;
-	}
-
-	private double findMaxpit(List<Scuderia> scuderie) {
-		double max = 0.0;
-		
-		for(Scuderia s : scuderie) {
-			if (s.getDurability()>max) {
-				max = s.getDurability();
-			}
-		}
-		
-		return max;
 	}
 	
 	private double findMaxDur(List<Scuderia> scuderie) {

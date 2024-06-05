@@ -15,19 +15,14 @@
    <bottom>
       <HBox prefHeight="62.0" prefWidth="666.0" BorderPane.alignment="CENTER">
          <children>
-            <Button mnemonicParsing="false" onAction="#ShowPiloti" prefHeight="30.0" prefWidth="155.0" text="Mostra Classifica Piloti">
+            <Button mnemonicParsing="false" onAction="#DoAzzera" prefHeight="30.0" prefWidth="185.0" text="Svuota Tabella">
                <HBox.margin>
-                  <Insets left="40.0" right="77.5" top="15.0" />
+                  <Insets left="99.0" right="99.0" top="15.0" />
                </HBox.margin>
             </Button>
-            <Button mnemonicParsing="false" onAction="#ShowScuderie" prefHeight="30.0" prefWidth="155.0" text="Mostra Classifica Scuderie">
+            <Button mnemonicParsing="false" onAction="#CambiaController" prefHeight="30.0" prefWidth="185.0" text="Imposta nuova simulazione">
                <HBox.margin>
-                  <Insets right="77.5" top="15.0" />
-               </HBox.margin>
-            </Button>
-            <Button mnemonicParsing="false" onAction="#CambiaController" prefHeight="30.0" prefWidth="155.0" text="Torna alla simulazione">
-               <HBox.margin>
-                  <Insets right="40.0" top="15.0" />
+                  <Insets top="15.0" />
                </HBox.margin>
             </Button>
          </children>
@@ -49,7 +44,7 @@
    <center>
       <VBox prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
          <children>
-            <VBox prefHeight="200.0" prefWidth="100.0">
+            <VBox prefHeight="390.0" prefWidth="700.0">
                <children>
                   <HBox prefHeight="30.0" prefWidth="700.0">
                      <children>
@@ -70,15 +65,15 @@
                         </TextField>
                      </children>
                   </HBox>
-                  <TableView fx:id="tableview" prefHeight="500.0" prefWidth="700.0">
+                  <TableView fx:id="tableview" prefHeight="345.0" prefWidth="700.0">
                     <columns>
-                      <TableColumn fx:id="Aero" editable="false" prefWidth="70.0" text="Aero" />
-                      <TableColumn fx:id="Telaio" editable="false" prefWidth="70.0" text="Telaio" />
-                        <TableColumn fx:id="Motore" editable="false" prefWidth="70.0" text="Motore" />
-                        <TableColumn fx:id="Affid" editable="false" prefWidth="70.0" text="Affidabilità" />
-                        <TableColumn fx:id="P1" prefWidth="118.0" text="Pilota 1" />
-                        <TableColumn fx:id="P2" prefWidth="118.0" text="Pilota 2" />
-                        <TableColumn fx:id="Scuderia" prefWidth="180.00006103515625" text="Scuderia" />
+                      <TableColumn fx:id="Aero" editable="false" maxWidth="70.0" minWidth="70.0" prefWidth="70.0" text="Aero" />
+                      <TableColumn fx:id="Telaio" editable="false" maxWidth="70.0" minWidth="70.0" prefWidth="70.0" text="Telaio" />
+                        <TableColumn fx:id="Motore" editable="false" maxWidth="70.0" minWidth="70.0" prefWidth="70.0" text="Motore" />
+                        <TableColumn fx:id="Affid" editable="false" maxWidth="70.0" minWidth="70.0" prefWidth="70.0" text="Affidabilità" />
+                        <TableColumn fx:id="P1" maxWidth="118.0" minWidth="118.0" prefWidth="118.0" text="Pilota 1" />
+                        <TableColumn fx:id="P2" maxWidth="118.0" minWidth="118.0" prefWidth="118.0" text="Pilota 2" />
+                        <TableColumn fx:id="Scuderia" maxWidth="180.0" minWidth="180.0" prefWidth="180.00006103515625" text="Scuderia" />
                     </columns>
                   </TableView>
                </children>

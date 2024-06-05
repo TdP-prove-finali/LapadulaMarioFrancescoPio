@@ -1,6 +1,9 @@
 package it.polito.tdp.SimulazioneF1.Test;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
+
+import org.apache.commons.math3.geometry.spherical.oned.ArcsSet.Split;
 
 import it.polito.tdp.SimulazioneF1.model.*;
 
@@ -8,33 +11,13 @@ public class TestA {
 
 	public static void main(String[] args) {
 		
-		Model model = new Model();
-
-		/*for(Track t : model.getAllTracks()) {
-			
-			SimQ x = new SimQ(t, model.getAllPiloti());
-			ArrayList<Pilota> grid = new ArrayList<Pilota>(x.getGrid());
-			
-			SimR y = new SimR(t, model.getAllPiloti(), grid);
-			y.run();
-
-		}*/
+		String s1 = "1 VER 180";
+		String[] ss1 = s1.split(" ");
+		int pos1 =  Integer.valueOf(ss1[0]);
+		String tag1 = ss1[1];
+		int punti1 = Integer.valueOf(ss1[2]);
 		
-		/*SimQ x = new SimQ(t, model.getAllPiloti());
-		ArrayList<Pilota> grid = new ArrayList<Pilota>(x.getGrid());
-		
-		SimR y = new SimR(t, model.getAllPiloti(), grid);
-		y.run();*/
-		
-	
-		Scuderia ss = model.getAllScuderie().get(4);
-		Investimento i = new Investimento(ss, 0, 0, 0, 140, 0);
-		
-		Sim s = new Sim(model, model.getAllPiloti(), model.getAllScuderie());
-		s.init();
-		s.run();
-		System.out.println(s.printClassificaPiloti());
-		System.out.println(s.printClassificaCostruttori());
+		System.out.println(pos1+"-"+tag1+"-"+punti1);
 	}
 
 }

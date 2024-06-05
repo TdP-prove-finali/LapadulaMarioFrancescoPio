@@ -8,7 +8,6 @@ public class Investimento {
 		double aero = a*0.082143*1.12*moltiplicatore/100;
 		double telaio = t*0.082143*1.15*moltiplicatore/100;
 		double moltiplicatoreDur = ((Overall/s.getTotOVR()-1)/2.5)+1;
-		System.out.println("aero: "+a+" telaio: "+t+" motore: "+m+" aff: "+ r);
 		s.addAero(aero);
 		s.addChass(telaio);
 		s.addPower(motore);

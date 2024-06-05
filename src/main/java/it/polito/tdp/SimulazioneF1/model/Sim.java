@@ -29,19 +29,6 @@ public class Sim {
 		this.classificaPiloti = new HashMap<>();
 		this.classificaCostruttori = new HashMap<Scuderia, Integer>();
 		queue = new PriorityQueue<>();
-		
-		//System.out.println("CREAZIONE SIM");
-		
-		for(Scuderia t : scuderie) {
-			//System.out.println(t.toString()+" "+t.getTotOVR());
-			if(t.getTag().equals("RBR")) {
-				System.out.println("RBR");
-				System.out.println(t.getDurability());
-				System.out.println();
-			}
-		}
-		
-		
 	}
 	
 	public void init() {
@@ -230,10 +217,10 @@ public class Sim {
 		boolean flag = false;
 		for (Pilota p : this.classificaPiloti.keySet()) {
 			if(p.getS().equals(s) && flag==false) {
-				stringa1 += i + ".  " + p.getCognome().substring(0, 3).toUpperCase() + "   " + this.classificaPiloti.get(p);
+				stringa1 += i + " " + p.getCognome().substring(0, 3).toUpperCase() + " " + this.classificaPiloti.get(p);
 				flag = true;
 			}else if(p.getS().equals(s) && flag) {
-				stringa2 += i + ".  " + p.getCognome().substring(0, 3).toUpperCase() + "   " + this.classificaPiloti.get(p);
+				stringa2 += i + " " + p.getCognome().substring(0, 3).toUpperCase() + " " + this.classificaPiloti.get(p);
 			}
 			i++;
 		}
@@ -246,7 +233,7 @@ public class Sim {
 		int i = 1;
 		for(Scuderia sc : this.classificaCostruttori.keySet()) {
 			if(sc.equals(s)) {
-				scud = i + ".  " + s.getTag() + "   " + this.classificaCostruttori.get(sc);
+				scud = i + " " + s.getTag() + " " + this.classificaCostruttori.get(sc);
 			}
 			i++;
 		}

@@ -235,7 +235,8 @@ public class FXMLController {
     }
 
 	public void setModel(Model Model) {
-		this.model = Model;		
+		this.model = Model;	
+		this.setCombos();
 	}
 	
 	void gotoRisultati() throws Exception {

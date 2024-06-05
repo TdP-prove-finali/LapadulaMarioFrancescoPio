@@ -54,13 +54,8 @@ public class RisultatiController {
 	    }
 
 	    @FXML
-	    void ShowPiloti(ActionEvent event) {
-
-	    }
-
-	    @FXML
-	    void ShowScuderie(ActionEvent event) {
-
+	    void DoAzzera(ActionEvent event) {
+	    	tableview.getItems().clear();
 	    }
 
 	    @FXML
@@ -84,6 +79,7 @@ public class RisultatiController {
 		}
 		
 		public void init() {
+			tableview.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
 			Aero.setCellValueFactory(new PropertyValueFactory<Riga, Integer>("aero"));
 			Telaio.setCellValueFactory(new PropertyValueFactory<Riga, Integer>("telaio"));
 			Motore.setCellValueFactory(new PropertyValueFactory<Riga, Integer>("motore"));
@@ -92,6 +88,7 @@ public class RisultatiController {
 			P2.setCellValueFactory(new PropertyValueFactory<Riga, String>("p2"));
 			Scuderia.setCellValueFactory(new PropertyValueFactory<Riga, String>("scuderia"));
 			this.tableController = new TableController(this.tableview);
+			this.tableController.setdata(CambiaScena.getdata());
 		}
 		
 		public void add() {
@@ -103,7 +100,6 @@ public class RisultatiController {
 			String pilota1 = model.getPilota1();
 			String pilota2 = model.getPilota2();
 			String scuderia = model.getSc();
-			
 			Riga riga = new Riga(aero, telaio, motore, affid, pilota1, pilota2, scuderia);
 			tableController.addRiga(riga);
 		}

@@ -22,9 +22,10 @@ public class EntryPoint extends Application {
 		controller.setStage(stage);
 		
 		Scene scene = new Scene(root);
-		//scene.getStylesheets().add(getClass().getResource("/styles/Styles.css").toExternalForm());
+		scene.getStylesheets().add(getClass().getResource("/styles/Styles.css").toExternalForm());
 		stage.setScene(scene);
 		stage.show();
+		CambiaScena.startdata();
     }
 
     /**

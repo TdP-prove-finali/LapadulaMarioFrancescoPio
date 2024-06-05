@@ -11,12 +11,16 @@ public class TableController {
 
     public TableController(TableView<Riga> tableView) {
         this.tableView = tableView;
-        this.data = FXCollections.observableArrayList();
-        this.tableView.setItems(data);
+        
     }
 
     public void addRiga(Riga riga) {
         data.add(riga);
+    }
+    
+    public void setdata(ObservableList<Riga> dati) {
+    	this.data = dati;
+    	this.tableView.setItems(data);
     }
     
 }
