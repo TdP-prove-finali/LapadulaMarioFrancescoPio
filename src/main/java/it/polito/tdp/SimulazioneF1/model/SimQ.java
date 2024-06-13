@@ -39,7 +39,10 @@ public class SimQ {
 		lista = new ArrayList<>(mappa.entrySet());
 
 		// Ordina la lista in base ai valori delle chiavi (in ordine decrescente)
-	    Collections.sort(lista, new Comparator2());
+	    Collections.sort(lista, new ComparatorTime());
+	    Collections.reverse(lista);
+	    
+	    
 	    
 	    // Ricostruisci la mappa ordinata
 	    grid = new LinkedHashMap<>();

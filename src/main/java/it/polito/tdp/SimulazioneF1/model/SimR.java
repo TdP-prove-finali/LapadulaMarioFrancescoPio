@@ -356,7 +356,7 @@ public class SimR {
 	public Map<Pilota, Double> riordina(Map<Pilota, Double> mappa) {
 		
 		ArrayList<Entry<Pilota,Double>> lista = new ArrayList<>(mappa.entrySet());
-	    Collections.sort(lista, new CamparatorTime());
+	    Collections.sort(lista, new ComparatorTime());
 	    LinkedHashMap<Pilota, Double> mappaordinata = new LinkedHashMap<>();
 	    
 	    for (Map.Entry<Pilota, Double> entry : lista) {
