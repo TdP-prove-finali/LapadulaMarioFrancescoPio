@@ -10,6 +10,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
@@ -40,7 +41,7 @@ public class FXMLController {
     private Button Simula;
     
     @FXML
-    private TextField Segnalazione;
+    private TextArea Segnalazione;
 
     @FXML
     private TextField text1;
@@ -129,7 +130,7 @@ public class FXMLController {
     	Pilota nuovo2 = this.CBPilota2.getValue();
     	
     	if(nuovo1==null || nuovo2==null) {
-    		this.Segnalazione.appendText("Inserire i piloti che gareggeranno per la tua squadra.");
+    		this.Segnalazione.setText("Inserire i piloti che gareggeranno per la tua squadra.");
     		return;
     	}
     	
@@ -158,11 +159,11 @@ public class FXMLController {
     		int Aff = Integer.parseInt(aff);
     		
     		if(!(Aero>=0 && Telaio>=0 && Motore>=0 && Aff>=0)) {
-    			this.Segnalazione.appendText("Inserire valori interi positivi per gli investimenti.\n");
+    			this.Segnalazione.setText("Inserire valori interi positivi per gli investimenti.\n");
     			return;
     		}
     		if((Aero+Telaio+Aff+Motore)>140) {
-    			this.Segnalazione.appendText("Inserire importi la cui somma sia minore o uguale al limite imposto dal Budget Cup pari a 140 Milioni.\n");
+    			this.Segnalazione.setText("Inserire importi la cui somma sia minore o uguale al limite imposto dal Budget Cup pari a 140 Milioni.\n");
     			return;
     		}else {
     			this.investimenti = new ArrayList<>();
@@ -174,8 +175,8 @@ public class FXMLController {
     		
     		
     	}catch(NumberFormatException e) {
-    		e.printStackTrace();
-    		this.Segnalazione.appendText("I dati inseriti sono errati.\nInserire numeri interi.");
+    		//e.printStackTrace();
+    		this.Segnalazione.setText("I dati inseriti sono errati.\nInserire numeri interi.");
     		return;
     	} 
     	
@@ -197,15 +198,17 @@ public class FXMLController {
 		this.CBPilota1.setValue(null);
     	this.CBPilota2.setValue(null);
 		
-		this.Segnalazione.clear();
+
 	    text1.setText("0");
         text2.setText("0");
         text4.setText("0");
         text5.setText("0");
         this.setCombos();
-    	
+    	this.Segnalazione.clear();
         this.gotoRisultati();
     }
+    
+    //aggiungere campo testuale per gli errori
     
     void setCombos() {
     	this.ComboScuderia.getItems().addAll(model.getAllScuderie());
@@ -227,6 +230,7 @@ public class FXMLController {
         assert text2 != null : "fx:id=\"text2\" was not injected: check your FXML file 'Scene.fxml'.";
         assert text4 != null : "fx:id=\"text4\" was not injected: check your FXML file 'Scene.fxml'.";
         assert text5 != null : "fx:id=\"text5\" was not injected: check your FXML file 'Scene.fxml'.";
+        assert Segnalazione != null : "fx:id=\"Segnalazione\" was not injected: check your FXML file 'Scene.fxml'.";
         text1.setText("0");
         text2.setText("0");
         text4.setText("0");

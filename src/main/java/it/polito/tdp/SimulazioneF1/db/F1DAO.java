@@ -88,7 +88,7 @@ public class F1DAO {
 			ResultSet rs = st.executeQuery();
 			
 			while (rs.next()) {
-				Pilota p = new Pilota(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getInt(8), rs.getDouble(9), rs.getDouble(10), rs.getDouble(11), rs.getDouble(12), rs.getDouble(13), rs.getDouble(14), rs.getDouble(15),rs.getDouble(16));
+				Pilota p = new Pilota(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getInt(6), rs.getDouble(7), rs.getDouble(8), rs.getDouble(9), rs.getDouble(10), rs.getDouble(11), rs.getDouble(12), rs.getDouble(13),rs.getDouble(14));
 				int scuderiaid = rs.getInt(5);
 				Scuderia s = this.IdMapScuderie.get(scuderiaid);
 				p.setS(s);

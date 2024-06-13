@@ -6,10 +6,6 @@ public class Riga {
 	private int telaio;
 	private int motore;
 	private int aff;
-	private String p1;
-	private String p2;
-	private String scuderia;
-	
 	private int punti1;
 	private int punti2;
 	private int puntiS;
@@ -19,17 +15,6 @@ public class Riga {
 	private String tag1;
 	private String tag2;
 	private String tagS;
-
-	public Riga(int aero, int telaio, int motore, int aff, String p1, String p2, String scuderia) {
-		super();
-		this.aero = aero;
-		this.telaio = telaio;
-		this.motore = motore;
-		this.aff = aff;
-		this.p1 = p1;
-		this.p2 = p2;
-		this.scuderia = scuderia;
-	}
 
 	public int getAero() {
 		return aero;
@@ -45,18 +30,6 @@ public class Riga {
 
 	public int getAff() {
 		return aff;
-	}
-
-	public String getP1() {
-		return p1;
-	}
-
-	public String getP2() {
-		return p2;
-	}
-
-	public String getScuderia() {
-		return scuderia;
 	}
 
 	public Riga(int aero, int telaio, int motore, int aff, int punti1, int punti2, int puntiS, int pos1, int pos2,
@@ -112,7 +85,5 @@ public class Riga {
 	public String getTagS() {
 		return tagS;
 	}
-	
-	
-	
+		
 }

@@ -146,10 +146,7 @@ public class Scuderia {
 		this.aerI += d;
 	}
 	
-	//ANCORA DA SVILUPPARE
-	public void addPit(double d) {
-		this.aerI += d;
-	}
+
 	
 	@Override
 	public String toString() {

@@ -58,21 +58,21 @@
                       <TableColumn editable="false" maxWidth="140.0" minWidth="140.0" prefWidth="140.0" sortable="false" text="Pilota 1">
                            <columns>
                               <TableColumn fx:id="Tag1" editable="false" maxWidth="50.0" minWidth="50.0" prefWidth="50.0" sortable="false" text="Tag" />
-                              <TableColumn fx:id="Pos1" editable="false" maxWidth="40.0" minWidth="40.0" prefWidth="40.0" text="Pos" />
+                              <TableColumn id="Pos2" fx:id="Pos1" editable="false" maxWidth="40.0" minWidth="40.0" prefWidth="40.0" text="Pos" />
                               <TableColumn fx:id="Punti1" editable="false" maxWidth="50.0" minWidth="50.0" prefWidth="50.0" text="Punti" />
                            </columns>
                         </TableColumn>
                         <TableColumn editable="false" maxWidth="140.0" minWidth="140.0" prefWidth="140.0" sortable="false" text="Pilota 2">
                            <columns>
                               <TableColumn fx:id="Tag2" editable="false" maxWidth="50.0" minWidth="50.0" prefWidth="50.0" sortable="false" text="Tag" />
-                              <TableColumn fx:id="Pos2" editable="false" maxWidth="40.0" minWidth="40.0" prefWidth="40.0" text="Pos" />
+                              <TableColumn id="Pos1" fx:id="Pos2" editable="false" maxWidth="40.0" minWidth="40.0" prefWidth="40.0" text="Pos" />
                               <TableColumn fx:id="Punti2" editable="false" maxWidth="50.0" minWidth="50.0" prefWidth="50.0" text="Punti" />
                            </columns>
                         </TableColumn>
                         <TableColumn editable="false" maxWidth="173.0" minWidth="173.0" prefWidth="173.0" sortable="false" text="Scuderia">
                            <columns>
                               <TableColumn fx:id="TagS" editable="false" maxWidth="60.0" minWidth="60.0" prefWidth="60.0" sortable="false" text="Tag" />
-                              <TableColumn fx:id="PosS" editable="false" maxWidth="50.0" minWidth="50.0" prefWidth="50.0" text="Pos" />
+                              <TableColumn id="PosS" fx:id="PosS" editable="false" maxWidth="50.0" minWidth="50.0" prefWidth="50.0" text="Pos" />
                               <TableColumn fx:id="PuntiS" editable="false" maxWidth="63.0" minWidth="63.0" prefWidth="63.0" text="Punti" />
                            </columns>
                         </TableColumn>
