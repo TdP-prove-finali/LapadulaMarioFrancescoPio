@@ -1,6 +1,6 @@
 package it.polito.tdp.SimulazioneF1;
 
-import it.polito.tdp.SimulazioneF1.model.Model;
+import it.polito.tdp.model.Model;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXMLLoader;

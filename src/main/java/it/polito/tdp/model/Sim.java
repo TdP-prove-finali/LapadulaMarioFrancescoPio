@@ -1,9 +1,9 @@
-package it.polito.tdp.SimulazioneF1.model;
+package it.polito.tdp.model;
 
 import java.util.*;
 import java.util.Map.Entry;
 
-import it.polito.tdp.SimulazioneF1.model.Sessione.evento;
+import it.polito.tdp.model.Sessione.evento;
 
 public class Sim {
 	

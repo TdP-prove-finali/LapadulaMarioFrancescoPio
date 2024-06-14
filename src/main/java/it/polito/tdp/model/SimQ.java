@@ -1,4 +1,4 @@
-package it.polito.tdp.SimulazioneF1.model;
+package it.polito.tdp.model;
 
 import java.util.ArrayList;
 import java.util.Collections;

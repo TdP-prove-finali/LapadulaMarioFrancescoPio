@@ -3,7 +3,7 @@ package it.polito.tdp.SimulazioneF1;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-import it.polito.tdp.SimulazioneF1.model.Model;
+import it.polito.tdp.model.Model;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.TableColumn;

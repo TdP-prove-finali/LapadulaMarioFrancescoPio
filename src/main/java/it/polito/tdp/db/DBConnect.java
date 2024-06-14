@@ -1,4 +1,4 @@
-package it.polito.tdp.SimulazioneF1.db;
+package it.polito.tdp.db;
 
 import java.sql.Connection;
 import java.sql.SQLException;

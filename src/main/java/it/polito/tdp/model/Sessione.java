@@ -1,4 +1,4 @@
-package it.polito.tdp.SimulazioneF1.model;
+package it.polito.tdp.model;
 
 public class Sessione implements Comparable<Sessione>{
 	

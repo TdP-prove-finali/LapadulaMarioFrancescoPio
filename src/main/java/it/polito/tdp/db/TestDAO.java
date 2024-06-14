@@ -1,8 +1,8 @@
-package it.polito.tdp.SimulazioneF1.db;
+package it.polito.tdp.db;
 
-import it.polito.tdp.SimulazioneF1.model.Pilota;
-import it.polito.tdp.SimulazioneF1.model.Scuderia;
-import it.polito.tdp.SimulazioneF1.model.Track;
+import it.polito.tdp.model.Pilota;
+import it.polito.tdp.model.Scuderia;
+import it.polito.tdp.model.Track;
 
 public class TestDAO {
 

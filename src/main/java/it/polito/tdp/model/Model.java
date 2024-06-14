@@ -1,6 +1,7 @@
-package it.polito.tdp.SimulazioneF1.model;
+package it.polito.tdp.model;
 import java.util.*;
-import it.polito.tdp.SimulazioneF1.db.F1DAO;
+
+import it.polito.tdp.db.F1DAO;
 
 public class Model {
 	
