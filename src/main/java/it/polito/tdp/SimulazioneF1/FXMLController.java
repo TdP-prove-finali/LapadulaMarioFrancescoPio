@@ -6,7 +6,9 @@ import java.util.Collections;
 import java.util.LinkedList;
 import java.util.ResourceBundle;
 
-import it.polito.tdp.model.*;
+import it.polito.tdp.SimulazioneF1.model.Model;
+import it.polito.tdp.SimulazioneF1.model.Pilota;
+import it.polito.tdp.SimulazioneF1.model.Scuderia;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;

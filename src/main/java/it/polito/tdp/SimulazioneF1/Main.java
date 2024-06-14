@@ -5,4 +5,3 @@ public class Main {
         EntryPoint.main(args);
     }
 }
-fgrv
