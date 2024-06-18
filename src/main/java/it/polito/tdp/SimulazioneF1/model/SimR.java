@@ -12,14 +12,6 @@ import org.apache.commons.math3.distribution.NormalDistribution;
 
 public class SimR {
 	
-	final String RESET = "\u001B[0m";
-    final String RED = "\u001B[31m";
-    final String GREEN = "\u001B[32m";
-    final String BLUE = "\u001B[34m";
-    final String YELLOW = "\u001B[33m";
-    final String PURPLE = "\u001B[35m";
-    final String CYAN = "\u001B[36m";
-	
 	Track t;
 	LinkedHashMap<Pilota, Double> gara;
 	ArrayList<Pilota> grid;
@@ -43,32 +35,8 @@ public class SimR {
 		this.PitCrewMax();
 		this.pioggia = this.pioggia();
 	}
-	
-	
-	int ritiro = 0;
-	int guasti = 0;
-	int incidenti = 0;
-	int sorpassi = 0;
-	
-	public int getRitiro() {
-		return ritiro;
-	}
-
-	public int getGuasti() {
-		return guasti;
-	}
-
-	public int getIncidenti() {
-		return incidenti;
-	}
-
-	public int getSorpassi() {
-		return sorpassi;
-	}
 
 	public void run() {
-		
-		//System.out.println(t.getNome()+"    "+t.getOverI());
 		
 		this.partenza();
 		
@@ -89,6 +57,7 @@ public class SimR {
 			}
 			
 			if(i==t.getNGiri()) {
+			//per stampare i risultati di gara con i rispettivi tempi di arrivo
 			//this.printMap(gara);
 			}
 			
@@ -112,19 +81,19 @@ public class SimR {
 					if(this.ActionSorpasso(pd, pa)) {
 
 						
-						//se il sorpasso viene completato assegno al pilota dietro il tempo di gara del pilota davanti e li distanzio di 1.1 secondi
+						//se il sorpasso viene completato assegno al pilota dietro il tempo di gara del pilota davanti e li distanzio di 1 secondi
 						
 						this.gara.put(pd, this.gara.get(pa));
 						this.gara.put(pa, this.gara.get(pd)+1.0);
 						
 						//pa resta pa
+						
 						pilotaavanti = this.gara.get(pa); 
 						
 					}else {
 						
 						if(this.gara.get(pd)!=Double.MAX_VALUE) {
 							
-							//problema
 							this.gara.put(pd, this.gara.get(pa)+0.85);
 							
 						}						
@@ -158,18 +127,10 @@ public class SimR {
 			if(a1 || a2) {
 				
 				if(a1) {
-					
-					if(p1.getS().getTag().equals("RBR")) {
-						this.sorpassi++;
-					}
 					this.incidente(p1);
 					
 				}
 				if(a2) {
-					
-					if(p2.getS().getTag().equals("RBR")) {
-						this.sorpassi++;
-					}
 					this.incidente(p2);
 				
 				}
@@ -324,16 +285,11 @@ public class SimR {
 			if(this.gara.get(p)!=Double.MAX_VALUE) {
 
 				if(this.Guasto(p)){
-					if(p.getS().getTag().equals("RBR")) {
-						this.guasti++;
-					}
+					
 					this.incidente(p);
 				
 				}else if(this.IncidentePilotaGiro(p)) {
-					
-					if(p.getS().getTag().equals("RBR")) {
-						this.incidenti++;
-					}
+
 					this.incidente(p);
 					
 				}else {
@@ -370,10 +326,6 @@ public class SimR {
 	private void incidente(Pilota p) {
 		
 		if(this.gara.get(p)!=Double.MAX_VALUE) {
-			
-		if(p.getS().getTag().equals("RBR")) {
-			this.ritiro++;
-		}
 		
 		this.gara.put(p, Double.MAX_VALUE);
 		

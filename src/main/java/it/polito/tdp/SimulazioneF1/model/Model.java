@@ -53,10 +53,6 @@ public class Model {
 		this.motore = c;
 		this.affid = d;
 		
-		//forse inutile questa roba dei piloti perchè la faccio già nel controller
-		//da verificare
-		//bugia, probabilmente è utile
-		
 		Pilota P1 = null;
 		Pilota P2 = null;
 		

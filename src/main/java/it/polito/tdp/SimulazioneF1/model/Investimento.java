@@ -7,7 +7,8 @@ public class Investimento {
 		double motore = m*0.082143*0.85*moltiplicatore/100;
 		double aero = a*0.082143*1.12*moltiplicatore/100;
 		double telaio = t*0.082143*1.15*moltiplicatore/100;
-		double moltiplicatoreDur = ((Overall/s.getTotOVR()-1)/2.5)+1;
+		//provvisorio
+		double moltiplicatoreDur = ((MaxDur/s.getDurability()-1)/2.5)+1;
 		s.addAero(aero);
 		s.addChass(telaio);
 		s.addPower(motore);

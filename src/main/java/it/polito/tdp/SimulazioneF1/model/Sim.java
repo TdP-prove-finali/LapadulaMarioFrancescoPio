@@ -14,11 +14,6 @@ public class Sim {
 	ArrayList<Pilota> piloti;
 	ArrayList<Scuderia> scuderie;
 	
-	int Ritiri = 0;
-	int Sorpassi = 0;
-	int Guasti = 0;
-	int Incidenti = 0;
-	
 	public Sim(Model model, List<Pilota> piloti, List<Scuderia> scuderie) {
 		super();
 		this.model = model;
@@ -67,10 +62,6 @@ public class Sim {
 				y.run();
 				LinkedHashMap<Pilota, Integer> result = y.getResult();
 				this.loadResult(result);
-				this.Ritiri+=y.getRitiro();
-				this.Incidenti+=y.getIncidenti();
-				this.Guasti+=y.getGuasti();
-				this.Sorpassi+=y.getSorpassi();
 				break;
 		}	
 	}
@@ -164,10 +155,6 @@ public class Sim {
 		
 		return s;
 		
-	}
-	
-	public String Stats() {
-		return "Guasti: "+this.Guasti+" Incidenti: "+this.Incidenti+" Sorpassi: "+this.Sorpassi+" Totale: "+this.Ritiri;
 	}
 	
 	private Map<Pilota, Integer> riordina(Map<Pilota, Integer> mappa) {

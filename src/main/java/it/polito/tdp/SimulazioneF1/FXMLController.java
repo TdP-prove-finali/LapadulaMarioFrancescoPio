@@ -234,6 +234,22 @@ public class FXMLController {
         assert text4 != null : "fx:id=\"text4\" was not injected: check your FXML file 'Scene.fxml'.";
         assert text5 != null : "fx:id=\"text5\" was not injected: check your FXML file 'Scene.fxml'.";
         assert Segnalazione != null : "fx:id=\"Segnalazione\" was not injected: check your FXML file 'Scene.fxml'.";
+        
+        // Applica stili CSS ai componenti
+        ComboScuderia.getStyleClass().add("combo-box");
+        CBPilota1.getStyleClass().add("combo-box");
+        CBPilota2.getStyleClass().add("combo-box");
+
+        text1.getStyleClass().add("text-field");
+        text2.getStyleClass().add("text-field");
+        text4.getStyleClass().add("text-field");
+        text5.getStyleClass().add("text-field");
+
+        Azzera.getStyleClass().add("button");
+        Simula.getStyleClass().add("button");
+
+        Segnalazione.getStyleClass().add("text-area");
+        
         text1.setText("0");
         text2.setText("0");
         text4.setText("0");
