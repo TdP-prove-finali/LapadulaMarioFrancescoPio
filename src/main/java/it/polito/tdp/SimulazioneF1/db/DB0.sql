@@ -19,8 +19,8 @@
 CREATE DATABASE IF NOT EXISTS `simulazionef1` /*!40100 DEFAULT CHARACTER SET latin1 COLLATE latin1_swedish_ci */;
 USE `simulazionef1`;
 
--- Dump della struttura di tabella simulazionef1.costructors
-CREATE TABLE IF NOT EXISTS `costructors` (
+-- Dump della struttura di tabella simulazionef1.constructors
+CREATE TABLE IF NOT EXISTS `constructors` (
   `ID` int(11) DEFAULT NULL,
   `Nome` varchar(50) DEFAULT NULL,
   `Tag` varchar(50) DEFAULT NULL,
@@ -38,8 +38,8 @@ CREATE TABLE IF NOT EXISTS `costructors` (
   `Powertrain` double DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci COMMENT='Tabella delle scuderie partecipanti alla stagione 2024 di F1\r\n';
 
--- Dump dei dati della tabella simulazionef1.costructors: ~10 rows (circa)
-REPLACE INTO `costructors` (`ID`, `Nome`, `Tag`, `Pilota1ID`, `Pilota2ID`, `RaceEngineer Value`, `TechincalChief Value`, `HeadOfAerodynamics Value`, `SportingDircetor Value`, `PitCrew Value`, `PitCrew Time`, `Durability`, `Chassis`, `Aerodynamics`, `Powertrain`) VALUES
+-- Dump dei dati della tabella simulazionef1.constructors: ~10 rows (circa)
+REPLACE INTO `constructors` (`ID`, `Nome`, `Tag`, `Pilota1ID`, `Pilota2ID`, `RaceEngineer Value`, `TechincalChief Value`, `HeadOfAerodynamics Value`, `SportingDircetor Value`, `PitCrew Value`, `PitCrew Time`, `Durability`, `Chassis`, `Aerodynamics`, `Powertrain`) VALUES
 	(1, 'Red Bull Racing', 'RBR', 1, 11, 87.17, 94, 95, 95.25, 61.5, 2.625, 0.436, 0.478, 0.556, 0.542),
 	(2, 'Mercedes', 'MER', 44, 63, 88.67, 87.83, 88.13, 94, 54.67, 2.741, 0.409, 0.414, 0.441, 0.549),
 	(3, 'Ferrari', 'FER', 16, 55, 87, 94, 90, 94, 58.17, 2.654, 0.392, 0.36, 0.512, 0.588),
