@@ -1,0 +1,59 @@
+\chapter{Proposta di progetto}
+
+\label{Capitolo1}
+
+\section{Titolo della proposta}
+Simulazione di una stagione di F1 gestendo lo sviluppo tecnico di una scuderia
+
+\section{Descrizione del problema proposto}
+L’applicazione permette di indossare i panni di una scuderia di F1 e simulare una stagione avendo la possibilità di investire una somma di denaro limitata in quattro diversi reparti tecnici. È inoltre possibile cambiare i piloti della propria squadra prima dell’inizio della stagione. Tramite un numero elevato di simulazioni si potrà capire qual è la miglior coppia di piloti e il miglior piano di investimenti per massimizzare il risultato del team.
+
+\section{Descrizione della rilevanza gestionale del problema}
+In F1 è in vigore un regolamento che impone una somma di denaro massima per lo sviluppo della vettura per garantire parità di condizioni di partenza tra i vari team, dunque la scelta e il bilanciamento dei vari investimenti sono fondamentali.
+La sfida gestionale consiste nell’ottimizzazione di una strategia di investimento nei vari settori tecnici, verificando quanto ogni diversa combinazione di asset possa apportare cambiamenti sul rendimento finale.
+È importante valutare l’investimento in relazione alle caratteristiche del team scelto nella simulazione, in quanto potrebbe essere poco efficace andare ad investire tanto su un reparto in cui si è già abbastanza competitivi.
+È particolarmente significativa anche la scelta dei due piloti per massimizzare il rendimento della scuderia.
+
+\section{Descrizione dei data-set per la valutazione}
+L’applicazione fa uso di diversi dataset:
+
+\begin{itemize}
+    \item statistiche qualitative dei piloti rilasciate dal videogioco F1 Manager 2023\footnote{che detiene la licenza ufficiale della F1};
+    \item statistiche tecniche sui circuiti di gara dal sito \url{https://tracks.f1setup.it/};
+    \item statistiche tecniche delle scuderie estratte dal videogioco F1 2023\footnotemark[1] prodotto da Codemaster e EA;
+    \item statistiche qualitative sullo staff tecnico di ogni team estratte dal videogioco F1 Manager 2023\footnotemark[1];
+    \item tempo di percorrenza della pit-lane per ogni circuito, rilasciato da IGP Manager;
+    \item probabilità di pioggia calcolato rispetto alla frequenza di pioggia in determinato circuito \footnote{calcolato tenendo in considerazione le ultime 15 gare disputate sul determinato circuito};
+    \item indice di probabilità di un sorpasso calcolato per ogni circuito tramite la media dei sorpassi avvenuti nelle gare disputate dal 2010 al 2024 (dati estratti dal sito \url{https://www.statsf1.com/it/default.aspx});
+    \item tempo di percorrenza del giro basato sul giro più veloce effettuato nell’ultima gara disputata nello specifico circuito in esame (dati su gare avvenute prima della stagione 2024).
+\end{itemize}
+
+\section{Descrizione preliminare degli algoritmi coinvolti}
+Il principale algoritmo coinvolto è una simulazione a eventi discreti.
+L’intera stagione è divisa in eventi chiamati ‘Sessione’ che a loro volta saranno divisi in ‘Qualifica’ e ‘Gara’. C’è una ‘Sessione’ per ogni appuntamento nel calendario della stagione.
+All’inizio di ogni ‘Sessione’ di gara vengono calcolati gli indici di prestazione delle vetture dei vari team in base ai dati tecnici disponibili nel database e correlati alle caratteristiche della pista che ospiterà il weekend di gara.
+
+Esempio: sul tracciato di Montecarlo, che presenta un rapporto bassissimo rettilinei/curve e curve strette, sono più competitive le vetture che presentano un buon livello di aerodinamica e/o telaio, mentre non pesa granché il dato sulla qualità del reparto motoristico.
+
+Dopodiché si calcolano anche le prestazioni dei piloti in base alla pista.
+
+Esempio: un pilota con alti valori di gestione gomma su una pista con un alto consumo gomme ha un’ottima prestazione.
+
+Dopo aver calibrato le prestazioni di vetture e piloti in base al circuito si procede con la simulazione delle qualifiche che stabilisce la griglia di partenza per la gara. Nella simulazione della qualifica vengono prese in considerazione le prestazioni aggiornate dei team e alcune caratteristiche dei piloti legate alla velocità sul giro, combinati anche con fattori randomici.
+
+Finita la simulazione delle qualifiche, inizia la simulazione della gara. La prima fase di gara è la partenza: in questo momento c’è un’alta possibilità per un pilota di compiere e/o subire un sorpasso. Dopo la partenza la gara procede in maniera lineare: in ogni giro i piloti segnano un tempo in base alle proprie statistiche combinate con fattori randomici. Se il distacco tra due piloti è inferiore a 1 secondo, si simula il tentativo di sorpasso. Durante la gara possono verificarsi eventi particolari, come incidenti, problemi tecnici, problemi al pit stop e pioggia. La probabilità di questi eventi è legata al tracciato che ospita la gara e a caratteristiche tecniche delle scuderie (es. affidabilità e qualità della pit crew), oltre che a variabili aleatorie. Alla fine della gara si stila l’ordine di arrivo e si assegnano i punteggi.
+
+Alla fine di ogni ‘Sessione’ si aggiornano le classifiche. Questo iter prosegue fino alla fine della stagione di gara in corso.
+A questo punto viene stilata la classifica finale per i piloti e per i costruttori.
+
+\section{Descrizione preliminare delle funzionalità previste per l’applicazione software}
+L’utente potrà scegliere la scuderia da gestire da un menu a tendina e potrà inserire l’importo da investire in ognuno dei quattro reparti tecnici in campi di testo dedicati. L’utente dovrà rimanere entro la somma massima di 140 milioni di dollari, imposta dal nuovo regolamento di F1. Se la somma non verrà rispettata, l’avvio della simulazione sarà impedito.
+
+Tramite due ulteriori menu a tendina è possibile scegliere i due piloti che gareggeranno nella scuderia scelta. Il menu a tendina è popolato con tutti i piloti presenti attualmente in F1 e sarà inizializzato con i due piloti ingaggiati nel 2024 dal team scelto.
+Una volta completato l’inserimento dei dati è possibile avviare la simulazione tramite un pulsante dedicato.
+
+Completata la simulazione verranno visualizzati i risultati complessivi della scuderia e dei piloti della stessa affiancati da un riepilogo sugli investimenti effettuati. È possibile svolgere un numero illimitato di simulazioni, i cui risultati verranno mostrati in una tabella scorrevole tramite una seconda interfaccia grafica. La tabella sarà utile per confrontare i vari investimenti e trovare quello più proficuo per la scuderia scelta.
+
+Nel caso del mancato inserimento dei dati o della presenza di errori compilativi delle caselle di testo, la simulazione non verrà avviata.
+L’utente può liberare le caselle di testo della schermata simulativa con un pulsante ‘Cancella’ e azzerare i dati contenuti nella tabella con un pulsante ‘Azzera’.
+

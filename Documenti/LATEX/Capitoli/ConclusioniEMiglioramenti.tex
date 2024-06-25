@@ -1,0 +1,25 @@
+
+
+\chapter{Conclusioni e Miglioramenti}
+
+In sintesi, l’applicazione si dimostra efficace nel raggiungere l’obiettivo di simulare vari scenari della stagione 2024 di F1. La complessità degli eventi simulati è stata attentamente considerata, integrando una vasta gamma di fattori probabilistici e casuali che riflettono l'imprevedibilità caratteristica della competizione tra piloti su differenti vetture da corsa.
+
+Per quanto riguarda l’User Experience, l'interfaccia è stata progettata per offrire un'interazione fluida e intuitiva. A tal proposito la seconda View (Figura \ref{fig:risultati_fxml}) della GUI(Graphical User Interface) è stata specificamente concepita per consentire un rapido confronto tra i risultati ottenuti, ottimizzando i tempi di elaborazione per garantire una fruizione immediata dei dati finali.
+
+Una delle caratteristiche fondamentali del programma è la sua capacità di non diventare obsoleto nel tempo. Grazie all'importazione di dataset aggiornati sulla qualità delle vetture e dei piloti, l'applicazione è pronta ad essere utilizzata anche per le future stagioni di Formula 1, mantenendo la sua rilevanza e precisione nel tempo.
+
+Nonostante l'attuale efficacia del programma, la ricerca della soluzione ottimale per il bilanciamento degli investimenti tecnici rimane un obiettivo complesso. Le simulazioni condotte finora hanno evidenziato l'importanza di eseguire centinaia di iterazioni per esplorare tutte le principali combinazioni di investimento e limitare la variabilità intrinseca alle simulazioni.
+
+Inoltre, vi sono altri fattori strutturali che potrebbero migliorare ulteriormente l'applicazione, modellando più accuratamente il singolo evento gara e lo sviluppo stagionale. Questi sono:
+\begin{itemize}[label=-]
+    \item Strategia di gara: questa potrebbe essere implementata attraverso un algoritmo di machine learning. La strategia di gara è solitamente calcolata in base ad informazioni sulle telemetrie, temperature del circuito, stato degli pneumatici, posizioni di partenza, tipologia di circuito e condizioni meteo. Esse sono differenziate per i vari piloti in pista e a volte possono ribaltare l’esito della gara.
+    \item Usura delle gomme: questo fattore è molto influente in F1 poiché va ad influenzare la strategia di gara e influisce molto nelle fasi finali della gara. Il coefficiente di usura della gomma è un parametro difficile da calcolare poiché dipende dalla vettura, dalla capacità del pilota, dall’asfalto e dalle temperature.
+    \item Sviluppo di tutti i team: la simulazione non tiene conto del fatto che durante la stagione anche gli altri team possono investire per migliorare la qualità della vettura. Inoltre, nel contesto reale della Formula 1 gli investimenti non avvengono totalmente agli inizi della stagione, bensì gradualmente durante il susseguirsi delle gare.
+    \item Successo di un investimento: non sempre un investimento porta notevoli migliorie tecniche alla vettura. Può succedere che un investimento su una specifica area abbia un tasso di rendimento molto basso. Questo si potrebbe modellare con l’aggiunta di variabili probabilistiche legate alla qualità del reparto di ricerca del team.
+\end{itemize}
+
+Inoltre è molto importante sottolineare che i dati presenti nel database derivano da stime effettuate da enti legati alla Formula 1 e non rappresentano la qualità effettiva delle vetture dei team, dal momento che questi dati vengono tenuti segreti dalle scuderie. L'assenza di dati dettagliati e aggiornati implica quindi una certa incertezza nei risultati predetti dall'applicazione.
+
+In conclusione, nonostante le sfide e le limitazioni attuali, l'applicazione rappresenta un valido strumento di supporto per la pianificazione degli investimenti di un team di Formula 1. Potrebbe altresì costituire una solida base per lo sviluppo di videogiochi manageriali dedicati al campionato di Formula 1, ampliando così il suo potenziale utilizzo nel settore dell'intrattenimento e della simulazione sportiva.
+
+
