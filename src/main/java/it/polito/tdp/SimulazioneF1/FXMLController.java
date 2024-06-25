@@ -268,4 +268,6 @@ public class FXMLController {
 		this.stage = stage;		
 	}
 
+	//ok
+	
 }
