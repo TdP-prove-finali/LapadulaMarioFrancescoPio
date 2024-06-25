@@ -48,7 +48,7 @@ public class F1DAO {
 	
 	public HashMap<Integer, Scuderia> getAllScuderia(){
 		
-		final String sql = "SELECT * FROM costructors";
+		final String sql = "SELECT * FROM constructors";
 		
 		HashMap<Integer, Scuderia> result = new HashMap<Integer, Scuderia>();
 		this.IdMapScuderie = new TreeMap<Integer, Scuderia>();

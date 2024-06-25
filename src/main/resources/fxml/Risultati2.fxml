@@ -16,12 +16,12 @@
    <bottom>
       <HBox prefHeight="62.0" prefWidth="666.0" BorderPane.alignment="CENTER">
          <children>
-            <Button mnemonicParsing="false" onAction="#DoAzzera" prefHeight="30.0" prefWidth="185.0" text="Svuota Tabella">
+            <Button mnemonicParsing="false" onAction="#DoAzzera" prefHeight="30.0" prefWidth="195.0" text="Svuota Tabella">
                <HBox.margin>
-                  <Insets left="99.0" right="99.0" top="15.0" />
+                  <Insets left="90.0" right="96.0" top="15.0" />
                </HBox.margin>
             </Button>
-            <Button mnemonicParsing="false" onAction="#CambiaController" prefHeight="30.0" prefWidth="185.0" text="Imposta nuova simulazione">
+            <Button mnemonicParsing="false" onAction="#CambiaController" prefHeight="30.0" prefWidth="195.0" text="Imposta nuova simulazione">
                <HBox.margin>
                   <Insets top="15.0" />
                </HBox.margin>

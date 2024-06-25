@@ -130,7 +130,7 @@ public class FXMLController {
     void DoSimula(ActionEvent event) throws Exception {
     	
     	Pilota nuovo1 = this.CBPilota1.getValue();
-    	Pilota nuovo2 = this.CBPilota2.getValue();
+    	Pilota nuovo2 = this.CBPilota2.getValue();    	
     	
     	if(nuovo1==null || nuovo2==null) {
     		this.Segnalazione.setText("Inserire i piloti che gareggeranno per la tua squadra.");
@@ -186,7 +186,6 @@ public class FXMLController {
     	//controlli
     	if(this.ComboScuderia.getValue()!=null && this.investimenti.size()==4) {
     		model.simula(this.ComboScuderia.getValue(), investimenti.get(0), investimenti.get(1), investimenti.get(2), investimenti.get(3), this.getP1(), this.getP2());
-    	
     	}
     	
     	//azzerare tutti i campi
@@ -211,7 +210,6 @@ public class FXMLController {
         this.gotoRisultati();
     }
     
-    //aggiungere campo testuale per gli errori
     
     void setCombos() {
     	this.ComboScuderia.getItems().addAll(model.getAllScuderie());

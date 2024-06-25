@@ -90,6 +90,7 @@ public class RisultatiController2 {
         assert Tag2 != null : "fx:id=\"Tag2\" was not injected: check your FXML file 'Risultati2.fxml'.";
         assert TagS != null : "fx:id=\"TagS\" was not injected: check your FXML file 'Risultati2.fxml'.";
         assert Telaio != null : "fx:id=\"Telaio\" was not injected: check your FXML file 'Risultati2.fxml'.";
+        
         this.init();
     }
 
