@@ -1,0 +1,214 @@
+\documentclass[
+11pt, % The default document font size, options: 10pt, 11pt, 12pt
+%oneside, % Two side (alternating margins) for binding by default, uncomment to switch to one side
+italian, 
+singlespacing, % Single line spacing, alternatives: onehalfspacing or doublespacing
+%draft, % Uncomment to enable draft mode (no pictures, no links, overfull hboxes indicated)
+%nolistspacing, % If the document is onehalfspacing or doublespacing, uncomment this to set spacing in lists to single
+%liststotoc, % Uncomment to add the list of figures/tables/etc to the table of contents
+%toctotoc, % Uncomment to add the main table of contents to the table of contents
+%parskip, % Uncomment to add space between paragraphs
+%nohyperref, % Uncomment to not load the hyperref package
+headsepline, % Uncomment to get a line under the header
+%chapterinoneline, % Uncomment to place the chapter title next to the number on one line
+%consistentlayout, % Uncomment to change the layout of the declaration, abstract and acknowledgements pages to match the default layout
+]{MastersDoctoralThesis} % The class file specifying the document structure
+
+\usepackage[utf8]{inputenc} % Required for inputting international characters
+\usepackage[T1]{fontenc} % Output font encoding for international characters
+\usepackage{amsmath}
+\usepackage{verbatim}
+\usepackage{amsfonts}
+\usepackage{siunitx}
+\usepackage{subfloat}
+\usepackage{changepage}
+\usepackage{float}
+\usepackage{subfig}
+\usepackage{textcomp}
+\usepackage{enumitem}
+\usepackage{hyperref}
+\usepackage{lmodern} % Use the Palatino font by default
+\usepackage{eso-pic}
+\usepackage{parskip}
+\usepackage{setspace}
+\usepackage[nottoc]{tocbibind}
+\usepackage{diagbox}
+\usepackage{nicefrac}
+\usepackage[autostyle=true]{csquotes} % Required to generate language-dependent quotes in the bibliography
+\usepackage{amsthm}
+\usepackage[backend=bibtex,style=ieee,natbib=true]{biblatex} % Use the bibtex backend with the authoryear citation style (which resembles APA)à
+\usepackage{footmisc}
+
+\theoremstyle{plain} 
+\newtheorem{thm}{Theorem}[section] 
+\newtheorem{cor}[thm]{Corollary} 
+\newtheorem{lem}[thm]{Lemma} 
+\newtheorem{prop}[thm]{Proposition} 
+
+\theoremstyle{definition} 
+\newtheorem{defn}{Definition}[chapter] 
+
+\theoremstyle{remark} 
+\newtheorem{obs}{Observation} 
+
+\newcommand\alcentropagina[1]{\AddToShipoutPicture{%
+		\AtPageCenter{\makebox(50,0){\includegraphics[width=1.2\textwidth]{#1}}}}}
+
+%	MARGIN SETTINGS
+
+\geometry{
+	paper=a4paper, % Change to letterpaper for US letter
+	inner=3.8cm, % Inner margin 
+	outer=3.8cm, % Outer margin
+	bindingoffset=.5cm, % Binding offset
+	top=1.5cm, % Top margin
+	bottom=1.5cm, % Bottom margin
+	%showframe, % Uncomment to show how the type block is set on the page
+}
+
+%INFO
+
+\supervisor{Fulvio \textsc{Corno}} % Your supervisor's name, this is used in the title page, print it elsewhere with \supname
+\degree{Ingegneria Gestionale L8} % Your degree name, this is used in the title page and abstract, print it elsewhere with \degreename
+\author{Mario Francesco Pio  \textsc{Lapadula}} % Your name, this is used in the title page and abstract, print it elsewhere with \authorname
+\keywords{} % Keywords for your thesis, this is not currently used anywhere in the template, print it elsewhere with \keywordnames
+\university{Politecnico di Torino} % Your university's name and URL, this is used in the title page and abstract, print it elsewhere with \univname
+\thesistitle{Applicazione gestionale per la simulazione di una stagione di F1 2024} % Your thesis title, this is used in the title and abstract,
+
+\AtBeginDocument{
+\hypersetup{pdftitle=\ttitle} % Set the PDF's title to your title
+\hypersetup{pdfauthor=\authorname} % Set the PDF's author to your name
+\hypersetup{pdfkeywords=\keywordnames} % Set the PDF's keywords to your keywords
+}
+
+\begin{document}
+
+%----------------------------------- FRONTESPIZIO GRANDE ----------------------
+\newgeometry{
+	paper=a4paper, % Change to letterpaper for US letter
+	inner=3cm, % Inner margin
+	outer=2.5cm, % Outer margin
+	bindingoffset=.5cm, % Binding offset
+	top=3.5cm, % Top margin
+	bottom=1.5cm, % Bottom margin
+}
+
+%%%%%%%%%%%%%%%%%% PRIMA PAGINA %%%%%%%%%%%%%%%%%%
+
+% Use roman page numbering style (i, ii, iii, iv...) for the pre-content pages
+
+\pagestyle{plain} % Default to the plain heading style until the thesis style is called for the body content
+\begin{titlepage}
+	\begin{center}
+		
+		\includegraphics[scale=0.27]{Figures/logo.jpg} % University/department logo - uncomment to place it
+            
+		%\vspace*{.06\textheight}  
+		{\color{black}{\scshape\LARGE \univname \par}\vspace{1.2cm}} % University name
+		
+		\textsc{\Large Laurea Triennale in
+			\degreename}\\[0.5cm] % Thesis type
+		
+		\HRule \\[2cm] % Horizontal line
+		{\huge \bfseries \ttitle\par}\vspace{1cm} % Thesis title
+		
+		\begin{minipage}[t]{0.4\textwidth}
+			\begin{flushleft} \large
+				\emph{Candidato}\\
+				\href{}{\authorname} % Author name - remove the \href bracket to remove the link
+			\end{flushleft}
+		\end{minipage}
+		\begin{minipage}[t]{0.4\textwidth}
+			\begin{flushright} \large
+				\emph{Relatore} \\
+				\href{}{\supname} \\ % Supervisor name - remove the \href bracket to remove the link  
+				\phantom{null}\newline 
+			\end{flushright}
+		\end{minipage}\\[2cm]
+		
+		\vfill
+  
+		\vfill
+		\HRule \\[1cm] % Horizontal line
+		{\large ANNO ACCADEMICO 2023/2024 }\\[4cm] 
+		
+		\vfill
+	\end{center}
+
+
+\cleardoublepage
+
+%----------------------------------------------------------------------------------------
+%	TITLE PAGE
+%----------------------------------------------------------------------------------------
+
+
+	\begin{center}
+ 
+		\vspace{21cm}
+		%
+		% Autore
+		\makeatletter
+		\large\textrm{\authorname}
+		\makeatother
+		\vspace{8.85cm}
+		%
+		% Titolo
+		\begin{center}
+			\makeatletter
+			\singlespacing\Huge\textsc{\ttitle}
+			\makeatother
+		\end{center}%
+		\vspace{0.4cm}
+		%
+		% Tipo di Tesi
+		\makeatletter
+		\large\textit{Tesi di Laurea Triennale}
+		\makeatother
+		\vfill
+		%
+		\large POLITECNICO DI TORINO\\
+		\vspace{1cm}
+		%
+		% Data Esame di Laurea
+		\makeatletter
+		\large\textrm{Luglio 2024} % Add month and year of your graduation
+		\makeatother
+	\end{center}
+\end{titlepage}
+
+\restoregeometry
+
+\pagestyle{plain} % Default to the plain heading style until the thesis style is called for the body content
+
+%----------------------------------------------------------------------------------------
+%	LIST OF CONTENTS/FIGURES/TABLES PAGES
+%----------------------------------------------------------------------------------------
+\frontmatter % Use roman page numbering style (i, ii, iii, iv...) for the pre-content pages
+
+\tableofcontents % Prints the main table of contents
+
+\listoffigures % Prints the list of figures
+
+%	THESIS CONTENT - CHAPTERS
+%----------------------------------------------------------------------------------------
+
+\mainmatter % Begin numeric (1,2,3...) page numbering
+
+\pagestyle{thesis} % Return the page headers back to the "thesis" style
+
+% Include the chapters of the thesis as separate files from the Chapters folder
+
+\include{Chapters/PropostaDiProgetto}
+\include{Chapters/DescrizioneDettagliataDelProblemaAffrontato}
+\include{Chapters/DeescrizioneDelDataset}
+\include{Chapters/FunzionamentoDellApplicazione}
+\include{Chapters/AlgoritmieStruttureDati}
+\include{Chapters/DiagrammaDelleClassi}
+\include{Chapters/SchermateDellApplicazione}
+\include{Chapters/RiusltatisSperimentaliEAnalisi}
+\include{Chapters/ConclusioniEMiglioramenti}
+
+\appendix
+\include{Appendices/Appendice}
+\end{document}  
