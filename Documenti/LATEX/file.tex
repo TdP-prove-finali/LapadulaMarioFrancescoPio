@@ -211,4 +211,25 @@ headsepline, % Uncomment to get a line under the header
 
 \appendix
 \include{Appendices/Appendice}
+
+% Nuova pagina per la licenza
+\newpage
+\thispagestyle{empty}  % Rimuove intestazione e piè di pagina
+
+
+\vspace{10cm}
+
+% Aggiungi il logo della licenza (opzionale)
+\begin{figure}[b]
+    \centering
+    \href{https://creativecommons.org/licenses/by-nc-sa/4.0/}{
+        \includegraphics[width=0.6\textwidth]{Figures/licenza.png} % Aggiungi il percorso corretto del logo
+    }
+
+    \vspace{0.5cm} % Spazio verticale tra la didascalia e il testo aggiuntivo
+    \parbox{\textwidth}{\\Questo documento è rilasciato sotto la licenza \textbf{Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License}}
+\end{figure}
+
+
+
 \end{document}  
